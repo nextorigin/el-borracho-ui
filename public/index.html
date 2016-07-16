@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>El Borracho</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic" rel="stylesheet" type="text/css">
+  <link href="./css/raphaelicons.css" rel="stylesheet" type="text/css" />
+  <style>
+  ul { padding: 0; }
+  button:hover { cursor: pointer; }
+  body { padding: 0; margin: 0; background: white; color: black; min-height: 320px; font-family: Helvetica,"Helvetica Neue","Open Sans",Arial,sans-serif; letter-spacing: -0.06em; }
+  header { display: block; position: relative; margin: 50px 55px 0; padding: 6px 0; box-sizing: border-box; border-bottom: 6px solid black; }
+  header h1 { font-size: 3.2em; margin: 0; letter-spacing: -0.06em; }
+  header nav.filters { position: absolute; top: 14px; left: 367px; right: 0; bottom: 0; }
+  header nav.filters li { float: left; width: 137px; height: 26px; background: green; margin: 0 17px 0 0; list-style-type: none; padding: 4px 8px; box-sizing: border-box; }
+  header nav.filters li.queue { background: #00aeef; }
+  header nav.filters li.state.wait { background: #a186be; }
+  header nav.filters li h6 { font-size: 1em; font-weight: bold; float: left; margin: 0; }
+  header nav.filters li button { background: transparent; border: none; color: black; opacity: 0.5; font-size: 1.3em; float: right; margin-top: -6px; margin-right: -7px; padding: 1px 4px; box-sizing: border-box; height: 26px; width: 24px; }
+  header nav.filters button { font-size: 1.4em; background: transparent; border: none; color: #b8b8b8;}
+  header nav.filters button.add { float: right; width: 28px; height: 28px; padding: 5px; box-sizing: border-box; }
+
+  section.jobs { position: relative; margin: 20px 55px 0; }
+  section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; }
+  section.jobs li h3 { font-size: 0.9em; margin: 0; }
+  section.jobs li span { font-size: 0.9em; }
+  section.jobs li .label { position: absolute; top: 0; right: 0; bottom: 0; width: 11px; }
+  section.jobs li.state.wait .label { background: #a186be; }
+
+
+@media all and (max-width:630px) { }
+
+  </style>
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+  <script src="./js/el-borracho.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+  <section class="stats">
+    <aside class="teaser">
+      <dl>
+        <dt>active:</dt>
+        <dd></dd>
+        <dt>wait:</dt>
+        <dd></dd>
+        <dt>completed:</dt>
+        <dd></dd>
+        <dt>failed:</dt>
+        <dd></dd>
+      </dl>
+      <button class="downarrow icon"></button>
+    </aside>
+  </section>
+
+  <header>
+    <h1>El Borracho</h1>
+    <button class="icon loadingspinner">&#194;</button>
+    <nav class="current filters">
+      <ul>
+        <li class="filter queue">
+          <h6>queue: <span class="value">tacos</span></h6>
+          <button class="icon delete">&#194;</button>
+        </li>
+        <li class="filter state wait">
+          <h6>state: wait</h6>
+          <button class="icon delete">&#194;</button>
+        </li>
+      </ul>
+      <button class="icon add">@</button>
+    </nav>
+    <nav class="add filters">
+      <div class="queue-filters"></div>
+      <ul>
+        <li class="filter state active">
+          <h6>queue: <span class="value">active</span></h6>
+        </li>
+        <li class="filter state completed">
+          <h6>queue: <span class="value">completed</span></h6>
+        </li>
+        <li class="filter state delayed">
+          <h6>queue: <span class="value">delayed</span></h6>
+        </li>
+        <li class="filter state failed">
+          <h6>queue: <span class="value">failed</span></h6>
+        </li>
+        <li class="filter state wait">
+          <h6>queue: <span class="value">wait</span></h6>
+        </li>
+        <li class="filter state stuck">
+          <h6>queue: <span class="value">stuck</span></h6>
+        </li>
+        <li class="filter id">
+          <h6>id: <span class="value"></span></h6>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <section class="jobs">
+  <ul>
+    <li class="job state wait">
+      <h3 class="id">tacos 135</h3>
+      <span class="data">protein: carnitas, salsa: habanero</span>
+      <div class="label"></div>
+    </li>
+  </ul>
+  </section>
+  <div class="addfilters-mask"></div>
+</body>
+</html>
