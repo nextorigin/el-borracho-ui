@@ -93,13 +93,17 @@ class JobsController extends Spine.Controller
 
     if totalJobs > renderMax
       renderTotal = renderMax
-      remaining   = totalJobs - renderMax
-      pages       = Math.floor remaining / renderMax
+      pages       = Math.ceil totalJobs / renderMax
     else
       renderTotal = totalJobs
       pages       = 1
 
-    @jobMap.update jobs[0..renderTotal]
+    @currentPage = pages if @currentPage > pages
+    @pages       = pages
+    start        = (@currentPage - 1) * renderMax
+    end          = start + (renderTotal - 1)
+
+    @jobMap.update jobs[start..end]
     @view {jobs: @jobMap.components}
 
   updateEvery20Seconds: ->

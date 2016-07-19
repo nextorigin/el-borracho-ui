@@ -14,6 +14,10 @@ class Filter extends Spine.Model
     queueFilters = @findAllByAttribute "type", "queue"
     (filter.value for filter in queueFilters)
 
+  @data: ->
+    dataFilters = @findAllByAttribute "type", "data"
+    (filter.value for filter in dataFilters)
+
   @id: ->
     idFilter = @findByAttribute "type", "id"
     idFilter?.value
