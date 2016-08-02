@@ -98,7 +98,7 @@ bundleAll = (watch = false) ->
   shim  = bifyshm.configure "jquery": "$", appliesTo: includeExtensions: ['.js']
 
   b.plugin preppy, "window.require = "
-  # b.require file, expose: (name or file) for file, name of config.browserify.expose
+  b.require file, expose: (name or file) for file, name of config.browserify.expose
   b.transform shim, global: true
   if watch
     log "watching"
