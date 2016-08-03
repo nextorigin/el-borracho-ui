@@ -2,19 +2,26 @@ Maquette = require "maquette"
 
 
 class Mapper
-  constructor: (items, @view) ->
+  constructor: (records, @view) ->
     @mapping = Maquette.createMapping @identify, @create, @updateOne
-    @update items
+    @update records
 
-  identify:  (item) -> item.id
-  create:    (item) => @view item
-  updateOne: (item, target) ->
+  identify: (record) -> record.id
+
+  create: (record) =>
+    component = -> component.render()
+    component.render = => @view record
+    component.update = (r) -> record = r
+    component
+
+  updateOne: (record, target) ->
+    target?.update record
 
   components: =>
-    @mapping.results
+    (target?.render() for target in @mapping.results)
 
-  update: (items) ->
-    @mapping.map items
+  update: (records) ->
+    @mapping.map records
 
 
 module.exports = Mapper
