@@ -6,27 +6,13 @@ Mapper   = require "./mapper"
 class FiltersController extends Spine.Controller
   logPrefix: "(ElBorracho:Filters)"
 
-  showAddFilters: ->
-    ($ ".add.filters").add(".addfilters-mask").fadeIn 200
-
-  hideAddFilters: ->
-    ($ ".add.filters").add(".addfilters-mask").fadeOut 200
-
-  add: (e) ->
-    {type, value} = ($ e.target).data()
-    record        = new @Store {type, value}
-    record.save()
-
   delete: (e) ->
-    {id} = ($ e.target).data()
+    {id} = (($ e.target).closest ".filter").data()
     record = @Store.find id
     record.destroy()
 
   events:
-    "tap .current.filters .add":        "showAddFilters"
-    "tap .addfilters-mask":             "hideAddFilters"
-    "tap .add.filters .filter":         "add"
-    "tap .current.filters .delete":     "delete"
+    "click .filter .delete":          "delete"
 
   constructor: ({baseUrl}) ->
     @log "constructing"
