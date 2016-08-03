@@ -1,4 +1,4 @@
 li(class="job #{state}" id="job-#{queue}-#{id}" key=id data-id=id)
   h3.id #{queue} #{id}
-  span.data= JSON.stringify(data)
+  span.data= dataFormattedForDisplay()
   div.label

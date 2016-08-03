@@ -98,4 +98,7 @@ class Job extends Spine.Model
         byVal a, aQueue, b, bQueue
       else 0
 
+  dataFormattedForDisplay: =>
+    ("#{key}: #{value}" for key, value of @data).join ", "
+
 module.exports = Job
