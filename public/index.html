@@ -5,26 +5,50 @@
   <link href="https://fonts.googleapis.com/css?family=Karla:400,400italic,700,700italic" rel="stylesheet" type="text/css">
   <link href="./css/raphaelicons.css" rel="stylesheet" type="text/css" />
   <style>
-  ul { padding: 0; }
+  ul { padding: 0; margin: 0; }
   button:hover { cursor: pointer; }
+  button.icon { background: transparent; border: none; }
   body { padding: 0; margin: 0; background: white; color: black; min-height: 320px; font-family: Helvetica,"Helvetica Neue","Open Sans",Arial,sans-serif; letter-spacing: -0.06em; }
-  header { display: block; position: relative; margin: 50px 55px 0; padding: 6px 0; box-sizing: border-box; border-bottom: 6px solid black; }
+  body { display: flex; flex-direction: column; height: 100%;}
+
+  section.stats { margin: 0 55px; background: #363636; color: #CCC; }
+  section.stats .teaser { padding: 3px 6px; overflow: hidden; height: 20px; box-sizing: border-box; }
+  section.stats .teaser .totals { margin: 0; font-weight: bold; font-size: 0.75em; letter-spacing: -0.02em; }
+  section.stats .teaser .totals dt, section.stats .teaser .totals dd { float: left; }
+  section.stats .teaser .totals dd { margin: 0 1em 0 0.15em; }
+  section.stats .teaser button.downarrow { float: right; color: #868686; transform: rotate(90deg); font-size: 1.4em; margin: -8px -5px; }
+
+  header { position: relative; margin: 30px 55px 0; padding: 6px 0; border-bottom: 6px solid black; }
   header h1 { font-size: 3.2em; margin: 0; letter-spacing: -0.06em; }
+  header .loadingspinner { position: absolute; left: 263px; top: 29px; font-size: 1.8em; color: #BBB; }
   header nav.filters { position: absolute; top: 14px; left: 367px; right: 0; bottom: 0; }
-  header nav.filters li { float: left; width: 137px; height: 26px; background: green; margin: 0 17px 0 0; list-style-type: none; padding: 4px 8px; box-sizing: border-box; }
+  header nav.filters ul { display: inline-flex; flex-flow: row wrap; align-content: flex-start; align-items: center; height: 56px; }
+  header nav.filters li { width: 137px; height: 26px; background: green; margin: 0 17px 0 0; list-style-type: none; padding: 4px 8px; box-sizing: border-box; margin-left: 0.25em; }
   header nav.filters li.queue { background: #00aeef; }
+  header nav.filters li.state.active { background: #00ffff; }
   header nav.filters li.state.wait { background: #a186be; }
   header nav.filters li h6 { font-size: 0.95em; font-weight: bold; float: left; margin: 0; }
+  header nav.filters li h6 span { margin-left: 0.25em; }
   header nav.filters li button { background: transparent; border: none; color: black; opacity: 0.5; font-size: 1.3em; float: right; margin-top: -6px; margin-right: -7px; padding: 1px 4px; box-sizing: border-box; height: 26px; width: 24px; }
   header nav.filters button { font-size: 1.4em; background: transparent; border: none; color: #b8b8b8;}
-  header nav.filters button.add { float: right; width: 28px; height: 28px; padding: 5px; box-sizing: border-box; }
+  header nav.filters button.add { float: right; width: 28px; height: 28px; padding: 5px; box-sizing: border-box; margin: 16px 0 0; }
+  header nav.add.filters { display: none; }
 
-  section.jobs { position: relative; margin: 20px 55px 0; }
-  section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; }
+  section.jobs { position: relative; margin: 20px 55px 0; flex: auto; }
+  section.jobs ul { display: inline-flex; flex-flow: column wrap; align-items: flex-start; max-height: 100%; width: 100%; overflow: hidden; align-content: flex-start; }
+  section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; overflow: hidden; margin: 0 22px 3px 0; }
   section.jobs li h3 { font-size: 0.9em; margin: 0; }
   section.jobs li span { font-size: 0.9em; }
   section.jobs li .label { position: absolute; top: 0; right: 0; bottom: 0; width: 11px; }
-  section.jobs li.state.wait .label { background: #a186be; }
+
+  .queue .label { background: #00aeef; }
+  .wait .label { background: #a186be; }
+  .active .label { background: #00ffff; }
+  .completed .label { background: #00ff00; }
+  .delayed .label { background: #fff200; }
+  .failed .label { background: #ed145b; }
+  .stuck .label { background: #b7b7b7; }
+  .id .label { background: white; border: 2px solid #b7b7b7;}
 
 
 @media all and (max-width:630px) { }
@@ -36,34 +60,14 @@
 <body>
   <section class="stats">
     <aside class="teaser">
-      <dl>
-        <dt>active:</dt>
-        <dd></dd>
-        <dt>wait:</dt>
-        <dd></dd>
-        <dt>completed:</dt>
-        <dd></dd>
-        <dt>failed:</dt>
-        <dd></dd>
-      </dl>
-      <button class="downarrow icon"></button>
+      <button class="downarrow icon">=</button>
     </aside>
   </section>
 
   <header>
     <h1>El Borracho</h1>
-    <button class="icon loadingspinner">&#194;</button>
+    <button class="icon loadingspinner">0</button>
     <nav class="current filters">
-      <ul>
-        <li class="filter queue">
-          <h6>queue: <span class="value">tacos</span></h6>
-          <button class="icon delete">&#194;</button>
-        </li>
-        <li class="filter state wait">
-          <h6>state: wait</h6>
-          <button class="icon delete">&#194;</button>
-        </li>
-      </ul>
       <button class="icon add">@</button>
     </nav>
     <nav class="add filters">
@@ -97,13 +101,6 @@
     </nav>
   </header>
   <section class="jobs">
-  <ul>
-    <li class="job state wait">
-      <h3 class="id">tacos 135</h3>
-      <span class="data">protein: carnitas, salsa: habanero</span>
-      <div class="label"></div>
-    </li>
-  </ul>
   </section>
   <div class="addfilters-mask"></div>
 </body>

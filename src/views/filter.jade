@@ -1,3 +1,4 @@
 li(class="filter #{type} #{value}" id="filter-#{id}" key=id data-id=id data-type=type data-value=value)
-  h6= type
-    span.value value
+  h6 #{type}:
+    span.value= value
+  button.icon.delete Â

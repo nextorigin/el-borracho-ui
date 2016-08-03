@@ -90,6 +90,10 @@ class JobsController extends Spine.Controller
 
     @updateEvery20Seconds()
 
+  rowHeight: 64
+  columnWidth: 350
+  currentPage: 1
+
   render: =>
     @log "rendering"
 
