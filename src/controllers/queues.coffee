@@ -5,11 +5,13 @@ Maquette = require "maquette"
 class QueuesController extends Spine.Controller
   logPrefix: "(ElBorracho:Queues)"
 
+  showStatsAndStats: ->
+
   events:
     "tap .teaser .downarrow":              "showStatsAndStats"
 
   constructor: ({baseUrl}) ->
-    @debug "constructing"
+    @log "constructing"
 
     super
 
@@ -19,14 +21,14 @@ class QueuesController extends Spine.Controller
     @Store.baseUrl = baseUrl
     @projector or= Maquette.createProjector()
 
-    @Store.on "error", ->
+    @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
     @updateEvery15Seconds()
 
   render: =>
-    @debug "rendering"
+    @log "rendering"
     queues = @Store.all()
 
     totals = {}
@@ -35,15 +37,17 @@ class QueuesController extends Spine.Controller
         totals[state] ?= 0
         totals[state] += total
 
-    @view totals
+    @view {totals}
 
   updateEvery15Seconds: ->
     @_updateTimer = setInterval (=> @Store.fetch()), 15 * 1000
     @Store.fetch()
 
   pause: ->
-    @debug "pausing"
+    @log "pausing"
     clearInterval @_updateTimer if @_updateTimer?
+
+  error: (args...) => @trigger "error", args...
 
 
 module.exports = QueuesController

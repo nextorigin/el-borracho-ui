@@ -1,5 +1,6 @@
 Spine    = require "spine"
 Maquette = require "maquette"
+Mapper   = require "./mapper"
 
 
 class FiltersController extends Spine.Controller
@@ -28,26 +29,25 @@ class FiltersController extends Spine.Controller
     "tap .current.filters .delete":     "delete"
 
   constructor: ({baseUrl}) ->
-    @debug "constructing"
+    @log "constructing"
 
     super
 
     @Store      = require "../models/filter"
-    @Queue      = require "../models/queue"
     @view       = require "../views/filters"
     @filterView = require "../views/filter"
 
     @projector or= Maquette.createProjector()
     @filterMap   = new Mapper [], @filterView
 
-    @Store.on "error", ->
+    @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
     @default()
 
   render: =>
-    @debug "rendering"
+    @log "rendering"
     filters = @Store.all()
 
     @filterMap.update filters
@@ -59,6 +59,8 @@ class FiltersController extends Spine.Controller
     wait   = new @Store type: "state", value: "wait"
     active.save()
     wait.save()
+
+  error: (args...) => @trigger "error", args...
 
 
 module.exports = FiltersController

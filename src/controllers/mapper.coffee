@@ -11,7 +11,7 @@ class Mapper
   updateOne: (item, target) ->
 
   components: =>
-    (component() for component in @mapping.results)
+    @mapping.results
 
   update: (items) ->
     @mapping.map items

@@ -1,12 +1,13 @@
 Spine    = require "spine"
 Maquette = require "maquette"
+Mapper   = require "./mapper"
 
 
 class QueueFiltersController extends Spine.Controller
   logPrefix: "(ElBorracho:QueueFilters)"
 
   constructor: ->
-    @debug "constructing"
+    @log "constructing"
 
     super
 
@@ -17,19 +18,21 @@ class QueueFiltersController extends Spine.Controller
     @projector or= Maquette.createProjector()
     @filterMap   = new Mapper [], @filterView
 
-    @Store.on "error", ->
+    @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
-    @default()
+    # @default()
 
   render: =>
-    @debug "rendering"
-    queues  = @Queue.names()
-    filters = ({type: "queue", value} for value in queues)
+    @log "rendering"
+    queues  = @Store.names()
+    filters = ({type: "queue", id: "queue-#{value}", value} for value in queues)
 
     @filterMap.update filters
     @view {filters: @filterMap.components}
+
+  error: (args...) => @trigger "error", args...
 
 
 module.exports = QueueFiltersController

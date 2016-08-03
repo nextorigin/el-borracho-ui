@@ -6,13 +6,13 @@ Mapper   = require "./mapper"
 class JobsController extends Spine.Controller
   logPrefix: "(ElBorracho:Jobs)"
 
-  selectJobOrExtendJobSelection: (e) ->
+  selectOrExtendSelection: (e) ->
     job = e.target.id
     @pause() unless @paused()
     return @select job if @selecting
     @extendJobSelectionTo job
 
-  extendJobSelectionTo: (job) ->
+  extendSelectionTo: (job) ->
 
   paused: -> @loadingspinner.is ".paused"
 
@@ -21,9 +21,24 @@ class JobsController extends Spine.Controller
     @updateEvery20Seconds()
 
   pause: ->
-    @debug "pausing"
+    @log "pausing"
     clearInterval @_updateTimer if @_updateTimer?
     @loadingspinner.addClass ".paused"
+
+  selectAllOfQueue: ->
+  selectAllOfState: ->
+  beginFadeToSelected: ->
+  endFadeToSelected: ->
+  showControlsOrSelect: ->
+
+  delete: ->
+  makePending: ->
+
+  confirmMultiAction: ->
+  cancelMultiAction: ->
+
+  showStackTrace: ->
+  showDetail: ->
 
   ###
 
@@ -42,10 +57,7 @@ class JobsController extends Spine.Controller
   ###
 
   events:
-    "tap .stats .downarrow":              "showStatsAndStats"
     "tap .loadingspinner":                "togglePause"
-    "tap .filters .add":                  "addFilter"
-    "tap .filter .delete":                "deleteFilter"
     "longpress .filter.queue":            "selectAllOfQueue"
     "longpress .filter.state":            "selectAllOfState"
     "touchstart .job":                    "beginFadeToSelected"
@@ -60,7 +72,7 @@ class JobsController extends Spine.Controller
     "doubletap .job":                     "showDetail"
 
   constructor: ({baseUrl}) ->
-    @debug "constructing"
+    @log "constructing"
     super
 
     @Store     = require "../models/job"
@@ -72,14 +84,14 @@ class JobsController extends Spine.Controller
     @projector or= Maquette.createProjector()
     @jobMap      = new Mapper [], @jobView
 
-    @Store.on "error", ->
+    @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
     @updateEvery20Seconds()
 
   render: =>
-    @debug "rendering"
+    @log "rendering"
 
     jobs    = @Store.all()
     totalJobs = jobs.length
@@ -116,6 +128,8 @@ class JobsController extends Spine.Controller
   refresh: =>
     @pause()
     @updateEvery20Seconds()
+
+  error: (args...) => @trigger "error", args...
 
 
 module.exports = JobsController

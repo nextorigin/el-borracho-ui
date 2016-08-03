@@ -1,4 +1,4 @@
-li(className="job #{state}" id="job-#{queue}-#{id}" data-id=id)
-  h3.id= "#{queue} #{id}"
-    span.data= JSON.stringify(data)
-    div.label
+li(class="job #{state}" id="job-#{queue}-#{id}" key=id data-id=id)
+  h3.id #{queue} #{id}
+  span.data= JSON.stringify(data)
+  div.label

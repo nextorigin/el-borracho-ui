@@ -8,7 +8,7 @@ class Filter extends Spine.Model
 
   @states: ->
     stateFilters = @findAllByAttribute "type", "state"
-    (filter.state for filter in stateFilters)
+    (filter.value for filter in stateFilters)
 
   @queues: ->
     queueFilters = @findAllByAttribute "type", "queue"

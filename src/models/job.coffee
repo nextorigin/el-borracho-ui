@@ -1,7 +1,14 @@
 Spine  = require "spine"
+errify = require "errify"
 Queue  = require "./queue"
 Filter = require "./filter"
 {Ajax} = Spine
+
+
+awaitGet = (options, callback) ->
+  await Ajax.awaitGet options, defer status, xhr, statusText, data
+  return callback statusText, data, xhr unless status is "success"
+  callback null, data, xhr
 
 
 class Job extends Spine.Model
@@ -12,36 +19,36 @@ class Job extends Spine.Model
     "progress",
     "stacktrace"
 
-  @filter:
+  @filters:
     queues: []
     states: []
     data:   []
     id:     null
 
   @fetchFiltered: ->
-    ideally        = errify @error
-    queueFilters   = Filter.queues()
-    @filter.queues = queueFilters?.length and queueFilters or Queue.names()
-    @filter.states = Filter.states()
-    @filter.id     = Filter.id()
-    allJobs        = []
+    ideally         = errify @error
+    queueFilters    = Filter.queues()
+    @filters.queues = queueFilters?.length and queueFilters or Queue.names()
+    @filters.states = Filter.states()
+    @filters.id     = Filter.id()
+    allJobs         = []
 
-    for queue in @filter.queues
-      base = "#{@baseUrl}#{@url}"
+    for queue in @filters.queues
+      base = "#{@baseUrl}/#{queue}"
 
-      if id = @filter.id
+      if id = @filters.id
         url = "#{base}/#{id}"
-        await Ajax.awaitGet {url}, ideally defer jobs
+        await awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
-      else if @filter.states.length then for state in @filter.states
+      else if @filters.states.length then for state in @filters.states
         url = "#{base}/#{state}"
-        await Ajax.awaitGet {url}, ideally defer jobs
+        await awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
       else
         url = base
-        await Ajax.awaitGet {url}, ideally defer jobs
+        await awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
     allJobs = @sort allJobs
@@ -62,8 +69,10 @@ class Job extends Spine.Model
   ]
 
   @sort: (jobs) ->
-    queues = @filter.queues.length and @filter.queues
-    states = @filter.states.length and @filter.states
+    return jobs unless jobs?.length
+
+    queues = @filters.queues.length and @filters.queues
+    states = @filters.states.length and @filters.states
 
     byId = (a, b) ->
       aId = a.id
@@ -78,7 +87,7 @@ class Job extends Spine.Model
         if      aVal > bVal then 1
         else if aVal < bVal then -1
 
-    jobs.sort (a, b) ->
+    jobs.sort (a, b) =>
       if states
         aState = @stateOrder.indexOf a.state
         bState = @stateOrder.indexOf b.state

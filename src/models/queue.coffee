@@ -15,7 +15,7 @@ class Queue extends Spine.Model
   @url: "/jobs"
 
   @names: ->
-    (queue.name for queue in @all())
+    (queue.name() for queue in @all())
 
   name: (name) ->
     @id = name if name
