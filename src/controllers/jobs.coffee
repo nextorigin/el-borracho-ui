@@ -101,7 +101,7 @@ class JobsController extends Spine.Controller
     totalJobs = jobs.length
     height  = @el.height()
     width   = @el.width()
-    rows    = Math.floor height / @rowHeight
+    rows    = Math.floor (height - 120) / @rowHeight
     columns = Math.floor width / @columnWidth
 
     renderTotal = remaining = pages = 0
