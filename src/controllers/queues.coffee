@@ -6,9 +6,11 @@ class QueuesController extends Spine.Controller
   logPrefix: "(ElBorracho:Queues)"
 
   showStatsAndStats: ->
+    @el.toggleClass "show"
+    ($ ".downarrow").toggleClass "show"
 
   events:
-    "tap .teaser .downarrow":              "showStatsAndStats"
+    "click .downarrow":              "showStatsAndStats"
 
   constructor: ({baseUrl}) ->
     @log "constructing"

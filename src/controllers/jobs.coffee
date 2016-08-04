@@ -40,6 +40,12 @@ class JobsController extends Spine.Controller
   showStackTrace: ->
   showDetail: ->
 
+  pulseSpinner: =>
+    from = opacity: 0, speed: 120
+    to   = opacity: 1, speed: 120
+    @loadingspinner.animate(to).animate(from)
+                   .animate(to).animate(from)
+
   ###
 
   longpress to select many
@@ -84,9 +90,12 @@ class JobsController extends Spine.Controller
     @projector or= Maquette.createProjector()
     @jobMap      = new Mapper [], @jobView
 
+    @Store.on "refresh", @pulseSpinner
     @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
+
+    @loadingspinner = $ ".loadingspinner"
 
     @updateEvery20Seconds()
 

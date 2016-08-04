@@ -9,14 +9,14 @@ class AddFiltersController extends Spine.Controller
   showAddFilters: =>
     height = @el.get(0).scrollHeight + 100
     width  = 241
-    top    = 55
-    @el.css {height: 0, width: 0, top: 80, backgroundColor: "black"}
+    top    = 35
+    @el.css {height: 0, width: 0, top: 60, backgroundColor: "black"}
     @el.animate {width, speed: 180}
        .animate {height, top, speed: 300, backgroundColor: "white"}
     @addFiltersMask.fadeIn 200
 
   hideAddFilters: =>
-    @el.animate height: 0, top: 80, speed: 300, backgroundColor: "black"
+    @el.animate height: 0, top: 61, speed: 300, backgroundColor: "black"
        .animate width: 0, speed: 180
     @addFiltersMask.fadeOut 500
 
