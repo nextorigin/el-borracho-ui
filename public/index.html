@@ -75,6 +75,28 @@
   .filter.stuck, .job.stuck .label { background: #b7b7b7; }
   .filter.id, .job.id .label { background: white; border: 2px solid #b7b7b7;}
 
+/* Dashboard
+********************************** */
+div.dashboard h3 { float: left; }
+div.interval-slider { float: right; line-height: 1.3; font-size: 0.95em; padding: 15px 0 0; }
+span.current-interval { min-width: 40px; display: inline-block; padding: 0 0 5px 0; color: #B1003E; }
+div.interval-slider input { width: 160px; }
+
+#realtime-legend, #history-legend { width: 580px; text-align: left; margin-top: 5px; float: right; }
+#realtime-legend .timestamp, #history-legend .timestamp { display: inline-block; width: 220px; text-align: right; }
+#realtime-legend .line, #history-legend .line { display: inline-block; margin: 0 0 0 20px; }
+#realtime-legend .swatch, #history-legend .swatch { display: inline-block; width: 10px; height: 10px; margin: 0 8px 0 0; }
+#realtime-legend .tag, #history-legend .tag { display: inline-block; }
+
+@media (max-width: 790px) {
+  #realtime-legend, #history-legend { float: none; width: 100%; margin-bottom: 20px; }
+}
+
+@media (max-width: 500px) {
+  #realtime-legend, #history-legend { text-align: center; }
+}
+/* End Dashboard
+********************************** */
 
 @media all and (max-width:630px) { }
 
