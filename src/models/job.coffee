@@ -51,7 +51,6 @@ class Job extends Spine.Model
         await awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
-    allJobs = @sort allJobs
     @refresh allJobs, clear: true
 
   @filterData: (key, value) ->
@@ -68,7 +67,7 @@ class Job extends Spine.Model
     "stuck"
   ]
 
-  @sort: (jobs) ->
+  @comparator: (jobs) ->
     return jobs unless jobs?.length
 
     queues = @filters.queues.length and @filters.queues
