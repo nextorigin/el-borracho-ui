@@ -7,18 +7,14 @@ class AddFiltersController extends Spine.Controller
   logPrefix: "(ElBorracho:AddFilters)"
 
   showAddFilters: =>
-    height = @el.get(0).scrollHeight + 100
-    width  = 241
-    top    = 35
-    @el.css {height: 0, width: 0, top: 60, backgroundColor: "black"}
-    @el.animate {width, speed: 180}
-       .animate {height, top, speed: 300, backgroundColor: "white"}
-    @addFiltersMask.fadeIn 200
+    @el.add @showadd
+       .add @addFiltersMask
+       .addClass "show"
 
   hideAddFilters: =>
-    @el.animate height: 0, top: 61, speed: 300, backgroundColor: "black"
-       .animate width: 0, speed: 180
-    @addFiltersMask.fadeOut 500
+    @el.add @showadd
+       .add @addFiltersMask
+       .removeClass "show"
 
   add: (e) ->
     {type, value} = (($ e.target).closest ".filter").data()
@@ -27,7 +23,6 @@ class AddFiltersController extends Spine.Controller
     @hideAddFilters()
 
   events:
-    "click .showadd":                     "showAddFilters"
     "click .filter":                      "add"
 
   constructor: ({baseUrl}) ->

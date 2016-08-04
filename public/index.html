@@ -23,7 +23,8 @@
 
   header { position: relative; margin: 30px 55px 0; padding: 6px 0; border-bottom: 6px solid black; height: 55px; }
   header h1 { font-size: 3.2em; margin: 0; letter-spacing: -0.06em; }
-  header .loadingspinner { position: absolute; left: 263px; top: 29px; font-size: 1.8em; color: #BBB; opacity: 0;}
+  header .loadingspinner { position: absolute; left: 263px; top: 29px; font-size: 1.8em; color: #BBB; opacity: 0; transition: opacity 0.24s linear; }
+  header .loadingspinner.pulse { opacity: 1; transition: opacity 0.24s linear; }
   nav.current.filters { position: absolute; top: 14px; left: 367px; right: 0; bottom: 0; }
   nav.filters ul { display: inline-flex; flex-flow: row wrap; align-content: flex-start; align-items: center; height: 56px; }
   nav.filters li { width: 137px; height: 26px; background: green; margin: 0 17px 0 0; list-style-type: none; padding: 4px 8px; box-sizing: border-box; margin-left: 0.25em; position: relative; }
@@ -35,13 +36,28 @@
   nav.filters li button { background: transparent; border: none; color: black; opacity: 0.5; font-size: 1.3em; position: absolute; right: 0; top: 0; padding: 1px 4px; box-sizing: border-box; height: 26px; width: 24px; }
   nav.filters button, button.showadd { font-size: 1.4em; background: transparent; border: none; color: #b8b8b8;}
 
-  nav.add.filters { position: relative; width: 241px; box-sizing: border-box; border: 5px solid black; background: white; z-index: 220; right: 70px; top: 35px; display: flex; flex-flow: column; padding-bottom: 14px; overflow: hidden; margin-bottom: -100%; margin-left: auto; }
+  nav.add.filters { position: relative; width: 241px; box-sizing: border-box; border: 5px solid black; background-color: black; z-index: 220; right: 60px; top: 59px; display: flex; flex-flow: column; padding-bottom: 14px; overflow: hidden; margin-bottom: -100%; margin-left: auto; max-height: 28px; width: 0; visibility: hidden;
+    transition: background-color 0.4s linear,
+                max-height 0.4s ease-in-out,
+                top 0.4s ease-in-out,
+                width 0.22s ease-in-out 0.4s,
+                right 0.1s ease-in-out 0.52s,
+                visibility 0s linear 0.62s; }
+  nav.add.filters.show { background-color: white; top: 35px; width: 241px; right: 70px; max-height: 100%; visibility: visible;
+    transition: visibility 0s linear 0.2s,
+                right 0.1s linear 0.2s,
+                width 0.22s ease-in-out 0.2s,
+                background-color 0.4s linear 0.42s,
+                max-height 0.4s ease-in-out 0.42s,
+                top 0.4s ease-in-out 0.42s; }
   nav.add.filters ul { height: auto; flex-flow: column; align-items: flex-start; }
   nav.add.filters li { margin: 14px 20px 0; cursor: pointer; }
   nav.add.filters li button { display: none; }
   .addfilters-stage { position: relative; top: 0; right: 0; z-index: 201; margin: 0 5px 0 0;}
-  .addfilters-stage button.showadd { position: absolute; width: 28px; height: 28px; padding: 5px; box-sizing: border-box; margin: -7px -7px 0 0; top: 65px; right: 50px; }
-  .addfilters-mask { background: white; opacity: 0.7; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 200; }
+  .addfilters-stage button.showadd { position: absolute; width: 28px; height: 28px; padding: 0; box-sizing: border-box; margin: -6px -7px 0 0; top: 65px; right: 50px; transition: 0.2s linear 0.7s;}
+  .addfilters-stage button.showadd.show { background-color: black; transition: 0.2s; }
+  .addfilters-mask { background: white; opacity: 0; visibility: hidden; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 200; transition: visibility 0s linear 0.5s, opacity 0.5s linear; }
+  .addfilters-mask.show { opacity: 0.7; visibility: visible; transition: opacity 0.2s linear; }
 
   section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 90px); }
   section.jobs ul { display: inline-flex; flex-flow: column wrap; align-items: flex-start; max-height: 100%; width: 100%; overflow: hidden; align-content: flex-start; }

@@ -45,11 +45,12 @@ class JobsController extends Spine.Controller
   showDetail: ->
 
   pulseSpinner: =>
-    from = opacity: 0, speed: 120
-    to   = opacity: 1, speed: 120
-    @loadingspinner.animate(to).animate(from)
-                   .animate(to).animate(from)
-
+    @loadingspinner.addClass("pulse")
+                   .delay(320).queue -> ($ @).removeClass("pulse").dequeue()
+                   .delay(240).queue -> ($ @).addClass("pulse").dequeue()
+                   .delay(320).queue -> ($ @).removeClass("pulse").dequeue()
+                   .delay(240).queue -> ($ @).addClass("pulse").dequeue()
+                   .delay(320).queue -> ($ @).removeClass("pulse").dequeue()
   ###
 
   longpress to select many
