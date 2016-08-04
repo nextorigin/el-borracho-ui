@@ -6,7 +6,7 @@ class Mapper
     @mapping = Maquette.createMapping @identify, @create, @updateOne
     @update records
 
-  identify: (record) -> record.id
+  identify: (record) -> (record.constructor?.className or "") + record.id
 
   create: (record) =>
     component = -> component.render()

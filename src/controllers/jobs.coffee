@@ -3,6 +3,10 @@ Maquette = require "maquette"
 Mapper   = require "./mapper"
 
 
+class JobMapper extends Mapper
+  identify: (record) -> record.queue + record.id
+
+
 class JobsController extends Spine.Controller
   logPrefix: "(ElBorracho:Jobs)"
 
@@ -88,7 +92,7 @@ class JobsController extends Spine.Controller
 
     @Store.baseUrl = baseUrl
     @projector or= Maquette.createProjector()
-    @jobMap      = new Mapper [], @jobView
+    @jobMap      = new JobMapper [], @jobView
 
     @Store.on "refresh", @pulseSpinner
     @Store.on "error", @error
