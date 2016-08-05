@@ -8,6 +8,7 @@ class QueuesController extends Spine.Controller
   showStatsAndStats: ->
     @el.toggleClass "show"
     ($ ".downarrow").toggleClass "show"
+    # start or stop listening for graph stats
 
   events:
     "click .downarrow":              "showStatsAndStats"

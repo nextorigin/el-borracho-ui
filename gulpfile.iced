@@ -35,6 +35,7 @@ config =
     dest: "build/js/"
   pug:
     runtime: "\nvar h = require('maquette').h;\n"
+    marshalDataset: false
     src:  "src/views/**/*.jade"
     dest: "build/js/views/"
   coffee:
