@@ -5,14 +5,6 @@ Maquette = require "maquette"
 class QueuesController extends Spine.Controller
   logPrefix: "(ElBorracho:Queues)"
 
-  showStatsAndStats: ->
-    @el.toggleClass "show"
-    ($ ".downarrow").toggleClass "show"
-    # start or stop listening for graph stats
-
-  events:
-    "click .downarrow":              "showStatsAndStats"
-
   constructor: ({baseUrl}) ->
     @log "constructing"
 

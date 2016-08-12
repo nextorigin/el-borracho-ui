@@ -49,6 +49,7 @@ class ElBorracho extends Spine.Controller
 
     baseUrl      = "/jobs"
 
+    Stats        = require "./controllers/stats"
     Queues       = require "./controllers/queues"
     Filters      = require "./controllers/filters"
     AddFilters   = require "./controllers/add-filters"
@@ -58,6 +59,7 @@ class ElBorracho extends Spine.Controller
     @projector   = Maquette.createProjector()
 
     @graph       = new Graph        {@projector, el: "#realtime", baseUrl: ""}
+    @stats       = new Stats        {@projector, el: ".stats"}
     @queues      = new Queues       {@projector, el: ".teaser", baseUrl}
     @filters     = new Filters      {@projector, el: ".current.filters"}
     @addfilters  = new AddFilters   {@projector, el: ".add.filters"}
@@ -65,6 +67,7 @@ class ElBorracho extends Spine.Controller
     @jobs        = new Jobs         {@projector, el: ".jobs", baseUrl}
 
     @graph.on       "error", @error
+    @stats.on       "error", @error
     @queues.on      "error", @error
     @filters.on     "error", @error
     @addfilters.on  "error", @error
@@ -72,6 +75,8 @@ class ElBorracho extends Spine.Controller
     @jobs.on        "error", @error
 
     @filters.Store.on "change", @jobs.refresh
+    @stats.on "show", @graph.start
+    @stats.on "hide", @graph.stop
 
 $ ->
   window.elBorracho = new ElBorracho el: "body" unless window.elBorracho
