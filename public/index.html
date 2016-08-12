@@ -85,15 +85,15 @@ span.current-interval { min-width: 40px; display: inline-block; padding: 0 0 5px
 div.interval-slider input { width: 160px; }
 
 /*#realtime { margin-top: -100px; }*/
-#realtime, #history { position: relative; top: 0; margin: 20px; height: 140px; }
+#realtime, #history { position: relative; top: 0; margin: 20px; height: 140px; padding-top: 5px; box-sizing: border-box;}
 #history { position: relative; top: 0; margin: 20px; height: 40px; }
 
-#realtime figcaption.y_axis, #history figcaption.y_axis {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 40px;
-}
+#realtime figcaption.y_axis, #history figcaption.y_axis { position: absolute; top: 0; bottom: 0; width: 40px; }
+#realtime figcaption.y_axis .rickshaw_graph.y_axis, #history figcaption.y_axis .rickshaw_graph.y_axis { padding-top: 5px; }
+
+.stats .rickshaw_graph .y_ticks path, .stats .rickshaw_graph .x_ticks_d3 path { stroke: #AAA; }
+.stats .rickshaw_graph .x_tick.glow .title, .stats .rickshaw_graph .y_ticks.glow text { fill: #CCC; color: #CCC; }
+.stats .rickshaw_graph .y_ticks text, .stats .rickshaw_graph .x_ticks_d3 text { opacity: 1; }
 
 #realtime-legend, #history-legend { position: absolute; top: 0; left: 0; }
 #realtime-legend, #history-legend { width: 580px; text-align: left; margin-top: 5px; float: right; }
