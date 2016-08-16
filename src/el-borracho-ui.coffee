@@ -40,6 +40,17 @@ TODO:
   /:queue/:state streams
     then /:queue/?states=[...] can be combos of state streams
       normalize order of array in originalUrl so that caching works (sort then toString)
+
+
+  ipad styling
+    give filter labels more room less margin
+    graphs overflow stats bounding box
+      more specific flex CSS
+    reduce loading icon margin
+    reduce border margin try to fit two whole columns in portrait
+    provide hint of color for job state when column overflows container
+    reduce label margins so 6 filter labels can fit in portrait
+
 ###
 
 
