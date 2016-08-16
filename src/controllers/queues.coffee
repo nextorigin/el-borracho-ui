@@ -20,8 +20,6 @@ class QueuesController extends Spine.Controller
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
-    @updateEvery15Seconds()
-
   render: =>
     @log "rendering"
     queues = @Store.all()

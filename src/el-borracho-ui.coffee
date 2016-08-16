@@ -2,7 +2,6 @@ Spine    = require "spine"
 __       = require "spine-awaitajax"
 __       = require "spine-awaitajax/spine.awaitajax"
 Maquette = require "maquette"
-Graph    = require "el-borracho-graph/realtime-graph"
 # jQuery   = require "jquery"
 # window.jQuery = jQuery
 
@@ -64,7 +63,6 @@ class ElBorracho extends Spine.Controller
 
     @projector   = Maquette.createProjector()
 
-    @graph       = new Graph        {@projector, el: "#realtime", baseUrl: ""}
     @stats       = new Stats        {@projector, el: ".stats"}
     @queues      = new Queues       {@projector, el: ".teaser", baseUrl}
     @filters     = new Filters      {@projector, el: ".current.filters"}
@@ -72,7 +70,6 @@ class ElBorracho extends Spine.Controller
     @qfilters    = new QFilters     {@projector, el: ".add.filters .queue.filters"}
     @jobs        = new Jobs         {@projector, el: ".jobs", baseUrl}
 
-    @graph.on       "error", @error
     @stats.on       "error", @error
     @queues.on      "error", @error
     @filters.on     "error", @error
@@ -81,8 +78,9 @@ class ElBorracho extends Spine.Controller
     @jobs.on        "error", @error
 
     @filters.Store.on "change", @jobs.refresh
-    @stats.on "show", @graph.start
-    @stats.on "hide", @graph.stop
+
+    @queues.updateEvery15Seconds()
+
 
 $ ->
   window.elBorracho = new ElBorracho el: "body" unless window.elBorracho

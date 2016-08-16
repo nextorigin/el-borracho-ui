@@ -1,5 +1,7 @@
 Spine    = require "spine"
 Maquette = require "maquette"
+Graph    = require "el-borracho-graph/realtime-graph"
+History  = require "el-borracho-graph/history-graph"
 
 
 class StatsController extends Spine.Controller
@@ -17,13 +19,21 @@ class StatsController extends Spine.Controller
 
     super
 
+    @graph       = new Graph        {@projector, el: "#realtime", baseUrl: ""}
+    @history     = new History      {@projector, el: "#history", baseUrl: "/stats"}
+
+    @graph.on       "error", @error
+    @history.on     "error", @error
+
+    @history.Store.fetch()
+
   show: ->
     @el.addClass "show"
-    @trigger "show"
+    @graph.start()
 
   hide: ->
     @el.removeClass "show"
-    @trigger "hide"
+    @graph.stop()
 
   error: (args...) => @trigger "error", args...
 
