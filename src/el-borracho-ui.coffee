@@ -59,11 +59,10 @@ class ElBorracho extends Spine.Controller
 
   error: (args...) -> console.error args...
 
-  constructor: ->
+  constructor: ({@baseUrl}) ->
     super
-    @log "constructing"
-
-    baseUrl      = "/jobs"
+    @baseUrl   or=  "/jobs"
+    @log "constructing for url: #{@baseUrl}"
 
     Stats        = require "./controllers/stats"
     Queues       = require "./controllers/queues"
@@ -75,12 +74,16 @@ class ElBorracho extends Spine.Controller
     @projector   = Maquette.createProjector()
 
     @stats       = new Stats        {@projector, el: ".stats"}
-    @queues      = new Queues       {@projector, el: ".teaser", baseUrl}
+    @queues      = new Queues       {@projector, el: ".teaser", @baseUrl}
     @filters     = new Filters      {@projector, el: ".current.filters"}
     @addfilters  = new AddFilters   {@projector, el: ".add.filters"}
     @qfilters    = new QFilters     {@projector, el: ".add.filters .queue.filters"}
-    @jobs        = new Jobs         {@projector, el: ".jobs", baseUrl}
+    @jobs        = new Jobs         {@projector, el: ".jobs", @baseUrl}
 
+    @bindEvents()
+    @start()
+
+  bindEvents: ->
     @stats.on       "error", @error
     @queues.on      "error", @error
     @filters.on     "error", @error
@@ -90,9 +93,8 @@ class ElBorracho extends Spine.Controller
 
     @filters.Store.on "change", @jobs.refresh
 
+  start: ->
     @queues.updateEvery15Seconds()
 
 
-$ ->
-  window.elBorracho = new ElBorracho el: "body" unless window.elBorracho
-
+module.exports = ElBorracho

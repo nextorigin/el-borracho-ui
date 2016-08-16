@@ -42,9 +42,9 @@ config =
     src:  "src/**/*.+(coffee|iced)"
     dest: "build/js/"
   browserify:
-    # expose:
+    expose:
     #   "iced-coffee-script": null
-    #   "spine":              null
+      "el-borracho"           null
     libs: [
       "build/js/el-borracho-ui.js"
     ]
