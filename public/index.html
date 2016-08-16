@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>El Borracho</title>
@@ -10,20 +11,59 @@
   button:hover { cursor: pointer; }
   button:focus, button:active { outline: 0; }
   button.icon { background: transparent; border: none; }
+  html { height: 100%; }
   body { padding: 0; margin: 0; background: white; color: black; min-height: 320px; font-family: Helvetica,"Helvetica Neue","Open Sans",Arial,sans-serif; letter-spacing: -0.06em; }
   body { display: flex; flex-direction: column; height: 100%;}
 
-  section.stats { margin: 0 55px; background: #363636; color: #CCC; position: relative; }
-  section.stats #realtime { margin-top: -220px; transition: margin-top 0.3s; }
-  section.stats.show #realtime { margin-top: 20px; }
-  section.stats .teaser { padding: 3px 6px; overflow: hidden; height: 20px; box-sizing: border-box; }
-  section.stats .teaser .totals { margin: 0; font-weight: bold; font-size: 0.75em; letter-spacing: -0.02em; }
-  section.stats .teaser .totals dt, section.stats .teaser .totals dd { float: left; }
-  section.stats .teaser .totals dd { margin: 0 1em 0 0.15em; }
-  section.stats .teaser button.downarrow { float: right; color: #868686; transform: rotate(90deg); font-size: 1.4em; margin: -8px -5px; }
-  section.stats.show .teaser button.downarrow { transform: rotate(-90deg); }
+  figure.stats { margin: 0 55px; background: #363636; color: #CCC; position: relative; min-height: 20px; transition: min-height 0.3s; }
+  figure.stats.show { min-height: calc(20px + 140px + 20px + 80px + 20px + 20px); }
+  figure.stats #realtime, figure.stats #realtime-legend, figure.stats #history-legend { margin-top: calc(0px - 20px - 140px - 20px - 80px); transition: margin-top 0.3s; }
+  figure.stats.show #realtime, figure.stats.show #realtime-legend, figure.stats.show #history-legend { margin-top: 20px; }
 
-  header { position: relative; margin: 30px 55px 0; padding: 6px 0; border-bottom: 6px solid black; height: 55px; }
+  /* Dashboard
+  ********************************** */
+  div.dashboard h3 { float: left; }
+  div.interval-slider { float: right; line-height: 1.3; font-size: 0.95em; padding: 15px 0 0; }
+  span.current-interval { min-width: 40px; display: inline-block; padding: 0 0 5px 0; color: #B1003E; }
+  div.interval-slider input { width: 160px; }
+
+  #realtime, #history { position: relative; top: 0; margin: 20px 6px; height: 140px; padding-top: 5px; box-sizing: border-box; }
+  #realtime, #history, #realtime-legend, #history-legend { width: calc(100% - 6px - 6px); }
+  #history { position: relative; top: 0; margin: 20px 6px; height: 80px; }
+  #realtime > svg, #history > svg { padding-top: 8px; margin-top: -8px; }
+  #realtime figcaption.y_axis, #history figcaption.y_axis { position: absolute; top: 0; bottom: 0; width: 40px; }
+  #realtime figcaption.y_axis .rickshaw_graph.y_axis, #history figcaption.y_axis .rickshaw_graph.y_axis { padding-top: 5px; }
+  .stats .rickshaw_graph .y_ticks path, .stats .rickshaw_graph .x_ticks_d3 path { stroke: #AAA; }
+  .stats .rickshaw_graph .x_tick.glow .title, .stats .rickshaw_graph .y_ticks.glow text { fill: #CCC; color: #CCC; }
+  .stats .rickshaw_graph .y_ticks text, .stats .rickshaw_graph .x_ticks_d3 text { opacity: 1; }
+  #realtime .dot.active { position: absolute; z-index: 300; }
+  #realtime .detail { background: rgba(255, 255, 255, 0.24); }
+
+  #realtime-legend, #history-legend { position: absolute; text-align: center; margin: 20px 6px 0; font-size: 0.9em; font-weight: bold; letter-spacing: -0.02em; color: #808080; left: 0; top: 0;}
+  #history-legend { top: 160px; font-size: 0.8em; }
+  #realtime-legend .timestamp, #history-legend .timestamp { display: inline-block; }
+  #realtime-legend .line, #history-legend .line { display: inline-block; margin: 0 0 0 20px; }
+  #realtime-legend .swatch, #history-legend .swatch { display: inline-block; width: 10px; height: 10px; margin: 0 8px 0 0; }
+  #realtime-legend .tag, #history-legend .tag { display: inline-block; }
+
+  @media (max-width: 790px) {
+    /*#realtime-legend, #history-legend { float: none; width: 100%; margin-bottom: 20px; }*/
+  }
+
+  @media (max-width: 500px) {
+    /*#realtime-legend, #history-legend { text-align: center; }*/
+  }
+  /* End Dashboard
+  ********************************** */
+
+  figure.stats .teaser { padding: 3px 6px; overflow: hidden; height: 20px; box-sizing: border-box; }
+  figure.stats .teaser .totals { margin: 0; font-weight: bold; font-size: 0.75em; letter-spacing: -0.02em; }
+  figure.stats .teaser .totals dt, figure.stats .teaser .totals dd { float: left; }
+  figure.stats .teaser .totals dd { margin: 0 1em 0 0.15em; }
+  figure.stats .teaser button.downarrow { float: right; color: #868686; transform: rotate(90deg); font-size: 1.4em; margin: -8px -5px; padding: 2px 6px 3px; }
+  figure.stats.show .teaser button.downarrow { transform: rotate(-90deg); }
+
+  header { position: relative; margin: 30px 55px 0; padding: 6px 0; border-bottom: 6px solid black; min-height: 55px; }
   header h1 { font-size: 3.2em; margin: 0; letter-spacing: -0.06em; }
   header .loadingspinner { position: absolute; left: 263px; top: 29px; font-size: 1.8em; color: #BBB; opacity: 0; transition: opacity 0.24s linear; }
   header .loadingspinner.pulse { opacity: 1; transition: opacity 0.24s linear; }
@@ -61,7 +101,7 @@
   .addfilters-mask { background: white; opacity: 0; visibility: hidden; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 200; transition: visibility 0s linear 0.5s, opacity 0.5s linear; }
   .addfilters-mask.show { opacity: 0.7; visibility: visible; transition: opacity 0.2s linear; }
 
-  section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 90px); }
+  section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 90px); min-height: calc(100% - 20px - 77px - 90px); }
   section.jobs ul { display: inline-flex; flex-flow: column wrap; align-items: flex-start; max-height: 100%; width: 100%; overflow: hidden; align-content: flex-start; }
   section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; overflow: hidden; margin: 0 22px 3px 0; }
   section.jobs li h3 { font-size: 0.9em; margin: 0; }
@@ -77,41 +117,6 @@
   .filter.stuck, .job.stuck .label { background: #b7b7b7; }
   .filter.id, .job.id .label { background: white; border: 2px solid #b7b7b7;}
 
-/* Dashboard
-********************************** */
-div.dashboard h3 { float: left; }
-div.interval-slider { float: right; line-height: 1.3; font-size: 0.95em; padding: 15px 0 0; }
-span.current-interval { min-width: 40px; display: inline-block; padding: 0 0 5px 0; color: #B1003E; }
-div.interval-slider input { width: 160px; }
-
-/*#realtime { margin-top: -100px; }*/
-#realtime, #history { position: relative; top: 0; margin: 20px; height: 140px; padding-top: 5px; box-sizing: border-box;}
-#history { position: relative; top: 0; margin: 20px; height: 40px; }
-
-#realtime figcaption.y_axis, #history figcaption.y_axis { position: absolute; top: 0; bottom: 0; width: 40px; }
-#realtime figcaption.y_axis .rickshaw_graph.y_axis, #history figcaption.y_axis .rickshaw_graph.y_axis { padding-top: 5px; }
-
-.stats .rickshaw_graph .y_ticks path, .stats .rickshaw_graph .x_ticks_d3 path { stroke: #AAA; }
-.stats .rickshaw_graph .x_tick.glow .title, .stats .rickshaw_graph .y_ticks.glow text { fill: #CCC; color: #CCC; }
-.stats .rickshaw_graph .y_ticks text, .stats .rickshaw_graph .x_ticks_d3 text { opacity: 1; }
-
-#realtime-legend, #history-legend { position: absolute; top: 0; left: 0; }
-#realtime-legend, #history-legend { width: 580px; text-align: left; margin-top: 5px; float: right; }
-#realtime-legend .timestamp, #history-legend .timestamp { display: inline-block; width: 220px; text-align: right; }
-#realtime-legend .line, #history-legend .line { display: inline-block; margin: 0 0 0 20px; }
-#realtime-legend .swatch, #history-legend .swatch { display: inline-block; width: 10px; height: 10px; margin: 0 8px 0 0; }
-#realtime-legend .tag, #history-legend .tag { display: inline-block; }
-
-@media (max-width: 790px) {
-  #realtime-legend, #history-legend { float: none; width: 100%; margin-bottom: 20px; }
-}
-
-@media (max-width: 500px) {
-  #realtime-legend, #history-legend { text-align: center; }
-}
-/* End Dashboard
-********************************** */
-
 @media all and (max-width:630px) { }
 
   </style>
@@ -119,17 +124,15 @@ div.interval-slider input { width: 160px; }
   <script src="./js/el-borracho-ui.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-  <section class="stats">
-    <figure id="realtime">
-      <figcaption class="y_axis"></figcaption>
-    </figure>
+  <figure class="stats">
     <figcaption id="realtime-legend"></figcaption>
-    <figure id="history"></figure>
     <figcaption id="history-legend"></figcaption>
+    <section id="realtime"></section>
+    <section id="history"></section>
     <aside class="teaser">
       <button class="downarrow icon">=</button>
     </aside>
-  </section>
+  </figure>
   <div class="addfilters-stage">
     <button class="icon showadd">@</button>
     <nav class="add filters">
