@@ -24,17 +24,23 @@ TODO:
   style loading icon ✓
     add pulse animation when refreshing ✓
 
-  fix compressible
-    add test
-  fix sse-stream headers by adding Client::headers()
-    add test for headers
-  add graph CSS
+  fix sse-stream ✓
+    add test ✓
+  add graph CSS ✓
     later figure out how much we can strip
-  fix axis/grid
-    do we really need a separate element
-  theme graph with much prettier colors
-  fix legend
+  fix axis/grid ✓
+    do we really need a separate element ✓
+  theme graph with much prettier colors ✓
+  fix legend ✓
 
+  job sort always leaving something at index 1
+  pagination
+
+  /:queue/:count streams ?
+
+  /:queue/:state streams
+    then /:queue/?states=[...] can be combos of state streams
+      normalize order of array in originalUrl so that caching works (sort then toString)
 ###
 
 
