@@ -96,6 +96,7 @@ class JobsController extends Spine.Controller
     @jobMap      = new JobMapper [], @jobView
 
     @Store.on "refresh", @pulseSpinner
+    @Store.on "refresh", @projector.scheduleRender
     @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render

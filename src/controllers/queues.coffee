@@ -17,6 +17,7 @@ class QueuesController extends Spine.Controller
     @projector or= Maquette.createProjector()
 
     @Store.on "error", @error
+    @Store.on "refresh", @projector.scheduleRender
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
