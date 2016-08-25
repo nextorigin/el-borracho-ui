@@ -42,6 +42,8 @@ TODO:
       normalize order of array in originalUrl so that caching works (sort then toString)
 
 
+  webfont substitutes for helvetica ✓
+
   ipad styling
     give filter labels more room less margin ✓
     graphs overflow stats bounding box ✓
