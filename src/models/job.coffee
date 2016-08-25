@@ -74,8 +74,6 @@ class Job extends Spine.Model
     states = @filters.states.length and @filters.states
 
     byId = (a, b) ->
-      aId = a.id
-      bId = b.id
       if      a.id > b.id then 1
       else if a.id < b.id then -1
       else                     0
