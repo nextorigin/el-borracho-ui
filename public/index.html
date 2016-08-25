@@ -132,9 +132,9 @@
   <script src="./js/el-borracho-ui.js" type="text/javascript" charset="utf-8"></script>
   <script>
 
-$ ->
-  window.elBorracho = new ElBorracho el: "body"
-
+$(function() {
+  window.elBorracho = new ElBorrachoUI({el: "body"})
+});
   </script>
 </head>
 <body>

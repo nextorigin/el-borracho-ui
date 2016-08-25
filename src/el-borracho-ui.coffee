@@ -54,7 +54,7 @@ TODO:
 ###
 
 
-class ElBorracho extends Spine.Controller
+class ElBorrachoUI extends Spine.Controller
   logPrefix: "(ElBorracho)"
 
   error: (args...) -> console.error args...
@@ -97,4 +97,4 @@ class ElBorracho extends Spine.Controller
     @queues.updateEvery15Seconds()
 
 
-module.exports = ElBorracho
+module.exports = ElBorrachoUI

@@ -42,9 +42,9 @@ config =
     src:  "src/**/*.+(coffee|iced)"
     dest: "build/js/"
   browserify:
-    expose:
+    # expose:
     #   "iced-coffee-script": null
-      "el-borracho"           null
+      # "spine":              null
     libs: [
       "build/js/el-borracho-ui.js"
     ]
@@ -95,7 +95,7 @@ makewatcher = (src) ->
 
 bundleAll = (watch = false) ->
   watch = watch is true
-  b     = bify config.browserify.libs, fullPaths: watch, debug: true, cache: {}, packageCache: {}
+  b     = bify config.browserify.libs, fullPaths: watch, standalone: "ElBorrachoUI", debug: true, cache: {}, packageCache: {}
   shim  = bifyshm.configure "jquery": "$", appliesTo: includeExtensions: ['.js']
 
   b.plugin preppy, "window.require = "
