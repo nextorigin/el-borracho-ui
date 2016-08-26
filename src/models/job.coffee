@@ -24,13 +24,13 @@ class Job extends Spine.Model
     queues: []
     states: []
     data:   []
-    id:     null
+    ids:    []
 
   @updateFilters: =>
     queues          = Filter.queues()
     @filters.queues = queueFilters?.length and queueFilters or Queue.names()
     @filters.states = Filter.states()
-    @filters.id     = Filter.id()
+    @filters.ids    = Filter.ids()
 
   @fetchFiltered: ->
     @trigger "fetchFiltered"
@@ -42,10 +42,10 @@ class Job extends Spine.Model
     for queue in @filters.queues
       base = "#{@baseUrl}/#{queue}"
 
-      if id = @filters.id
+      if @filters.ids.length then for id in @filters.ids
         url = "#{base}/#{id}"
-        await awaitGet {url}, ideally defer jobs
-        allJobs = allJobs.concat jobs
+        await awaitGet {url}, defer err, jobs
+        allJobs = allJobs.concat jobs unless err
 
       else if @filters.states.length then for state in @filters.states
         url = "#{base}/#{state}"

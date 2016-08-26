@@ -18,9 +18,9 @@ class Filter extends Spine.Model
     dataFilters = @findAllByAttribute "type", "data"
     (filter.value for filter in dataFilters)
 
-  @id: ->
-    idFilter = @findByAttribute "type", "id"
-    idFilter?.value
+  @ids: ->
+    idFilters = @findAllByAttribute "type", "id"
+    (filter.value for filter in idFilters)
 
 
 module.exports = Filter
