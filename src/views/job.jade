@@ -2,7 +2,7 @@
   classes = {}
   classes[state] = true
 
-li(class="job" classes=classes id="job-#{queue}-#{id}" key="#{queue}-#{id}" data-id=id)
-  h3.id #{queue} #{id}
+li(class="job" classes=classes id="job-#{id}" key=id data-id=id)
+  h3.id #{queue} #{q_id}
   span.data= dataFormattedForDisplay()
   div.label

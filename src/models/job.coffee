@@ -14,6 +14,7 @@ awaitGet = (options, callback) ->
 class Job extends Spine.Model
   @configure "Job",
     "queue",
+    "q_id",
     "state",
     "data",
     "progress",
@@ -94,6 +95,11 @@ class Job extends Spine.Model
         bQueue = queues.indexOf b.queue
         byVal a, aQueue, b, bQueue
       else 0
+
+  constructor: (attributes) ->
+    attributes.q_id = attributes.id
+    attributes.id   = "#{attributes.queue}-#{attributes.id}"
+    super attributes
 
   dataFormattedForDisplay: =>
     ("#{key}: #{value}" for key, value of @data).join ", "
