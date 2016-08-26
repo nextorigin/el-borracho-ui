@@ -9,11 +9,12 @@
   <style>
   ul { padding: 0; margin: 0; }
   button:hover { cursor: pointer; }
-  button:focus, button:active { outline: 0; }
+  button:focus, button:active, input[type=text] { outline: 0; }
   button.icon { background: transparent; border: none; }
   html { height: 100%; }
-  body { padding: 0; margin: 0; background: white; color: black; min-height: 320px; font-family: "Helvetica Neue",HelveticaNeue,"TeX Gyre Heros",TeXGyreHeros,FreeSans,"Nimbus Sans L","Liberation Sans",Arimo,Helvetica,Arial,sans-serif; letter-spacing: -0.06em; }
+  body { padding: 0; margin: 0; background: white; color: black; min-height: 320px; }
   body { display: flex; flex-direction: column; height: 100%;}
+  body, .filter.editable input { font-family: Helvetica,"Helvetica Neue",HelveticaNeue,"TeX Gyre Heros",TeXGyreHeros,FreeSans,"Nimbus Sans L","Liberation Sans",Arimo,Arial,sans-serif; letter-spacing: -0.06em; }
 
   figure.stats { margin: 0 55px; background: #363636; color: #CCC; position: relative; min-height: 20px; transition: min-height 0.3s; overflow: hidden; }
   figure.stats.show { min-height: calc(20px + 140px + 20px + 80px + 20px + 20px); }
@@ -75,6 +76,7 @@
   nav.filters li.queue { background: #00aeef; }
   nav.filters li.state.active { background: #00ffff; }
   nav.filters li.state.wait { background: #a186be; }
+  nav.filters li.filter.id h6, nav.filters li.filter.id button { margin-top: -2px; margin-right: -2px; }
   nav.filters li h6 { font-size: 0.95em; font-weight: bold; float: left; margin: 0; }
   nav.filters li h6 span { margin-left: 0.25em; }
   nav.filters li button { background: transparent; border: none; color: black; opacity: 0.5; font-size: 1.3em; position: absolute; right: 0; top: 0; padding: 1px 4px; box-sizing: border-box; height: 26px; width: 24px; }
@@ -96,6 +98,9 @@
                 top 0.4s ease-in-out 0.42s; }
   nav.add.filters ul { height: auto; flex-flow: column; align-items: flex-start; }
   nav.add.filters li { margin: 14px 20px 0; cursor: pointer; }
+  nav.add.filters li.editable { margin-top: -26px; }
+  nav.add.filters li.editable input { display: inline; background: transparent; border: none; width: 5.3em; margin-left: 0.25em; font-size: 1em; font-weight: bold; margin-top: -4px; height: 23px; box-sizing: border-box; }
+  nav.add.filters li.editable input:focus { outline: 0; }
   nav.add.filters li button { display: none; }
   .addfilters-stage { position: relative; top: 0; right: 0; z-index: 201; margin: 0;}
   .addfilters-stage button.showadd { position: absolute; width: 28px; height: 28px; padding: 0; box-sizing: border-box; margin: -7px 55px 0 0; top: 65px; right: -7px; transition: 0.2s linear 0.7s;}

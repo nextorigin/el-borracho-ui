@@ -1,6 +1,8 @@
 Spine    = require "spine"
 Maquette = require "maquette"
+errify   = require "errify"
 Mapper   = require "./mapper"
+Editable = require "./editable-filter"
 
 
 class AddFiltersController extends Spine.Controller
@@ -16,8 +18,13 @@ class AddFiltersController extends Spine.Controller
        .add @addFiltersMask
        .removeClass "show"
 
+    (@el.find ".editable").remove()
+
   add: (e) ->
-    {type, value} = (($ e.target).closest ".filter").data()
+    $el           = ($ e.target).closest ".filter"
+    {type, value} = $el.data()
+    return @addData $el if type is "data"
+    return @addId $el   if type is "id"
     record        = new @Filter {type, value}
     record.save()
     @hideAddFilters()
@@ -65,6 +72,19 @@ class AddFiltersController extends Spine.Controller
     record.save() for item in items when record = new @Store item
     return
 
+  addEditable: (type, el) ->
+    ideally = errify ->
+
+    await new Editable {el}, ideally defer value
+    record = new @Filter {type, value}
+    record.save()
+    @hideAddFilters()
+
+  addData: ($el) ->
+    @addEditable "data", $el
+
+  addId: ($el) ->
+    @addEditable "id", $el
 
   error: (args...) => @trigger "error", args...
 
