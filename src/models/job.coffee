@@ -61,10 +61,10 @@ class Job extends Spine.Model
 
   @stateOrder: [
     "active"
+    "wait"
     "completed"
     "delayed"
     "failed"
-    "wait"
     "stuck"
   ]
 
