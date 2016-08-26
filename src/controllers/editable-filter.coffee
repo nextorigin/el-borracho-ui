@@ -42,8 +42,10 @@ class EditableFilter extends Spine.Controller
     @el.addClass "editable"
 
   addInput: ->
-    @input = $ '<input type="text" />'
-    (@el.find ".value").replaceWith @input
+    @input = $ '<input type="search" />'
+    form   = $ '<form action="." />'
+    form.append @input
+    (@el.find ".value").replaceWith form
 
   insertSelf: ->
     @el.insertAfter @sibling
