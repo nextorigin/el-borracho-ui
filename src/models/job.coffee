@@ -31,6 +31,7 @@ class Job extends Spine.Model
     @filters.queues = queueFilters?.length and queueFilters or Queue.names()
     @filters.states = Filter.states()
     @filters.ids    = Filter.ids()
+    @filters.data   = Filter.data()
 
   @fetchFiltered: ->
     @trigger "fetchFiltered"
@@ -60,7 +61,8 @@ class Job extends Spine.Model
     @refresh allJobs, clear: true
 
   @filterData: (key, value) ->
-    @select (record) -> record.data[key].match new RegExp value
+    matcher = new RegExp value
+    @select (record) -> record.data[key]?.toString().match matcher
 
   @error: (err) => @trigger "error", err
 

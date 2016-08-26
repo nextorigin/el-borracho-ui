@@ -112,7 +112,15 @@ class JobsController extends Spine.Controller
   render: =>
     @log "rendering"
 
-    jobs    = @Store.all()
+    jobs = []
+    if @Store.filters.data.length then for data in @Store.filters.data
+      [key, value] = data.split ":"
+      key          = key.trim()
+      value        = value.trim()
+      jobs         = jobs.concat @Store.filterData key, value
+    else
+      jobs = @Store.all()
+
     totalJobs = jobs.length
     height  = @el.height()
     width   = @el.width()
