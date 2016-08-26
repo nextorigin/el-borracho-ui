@@ -26,13 +26,18 @@ class Job extends Spine.Model
     data:   []
     id:     null
 
-  @fetchFiltered: ->
-    ideally         = errify @error
-    queueFilters    = Filter.queues()
+  @updateFilters: =>
+    queues          = Filter.queues()
     @filters.queues = queueFilters?.length and queueFilters or Queue.names()
     @filters.states = Filter.states()
     @filters.id     = Filter.id()
+
+  @fetchFiltered: ->
+    @trigger "fetchFiltered"
+    ideally         = errify @error
     allJobs         = []
+
+    @updateFilters()
 
     for queue in @filters.queues
       base = "#{@baseUrl}/#{queue}"
