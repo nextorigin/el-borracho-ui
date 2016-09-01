@@ -55,13 +55,12 @@ TODO:
 class ElBorrachoUI extends Spine.Controller
   logPrefix: "(ElBorracho)"
 
-  error: (args...) -> console.error args...
-
   constructor: ({@baseUrl}) ->
     super
     @baseUrl   or=  "/jobs"
     @log "constructing for url: #{@baseUrl}"
 
+    Dialogs      = require "./controllers/dialog-box"
     Stats        = require "./controllers/stats"
     Queues       = require "./controllers/queues"
     Filters      = require "./controllers/filters"
@@ -71,6 +70,7 @@ class ElBorrachoUI extends Spine.Controller
 
     @projector   = Maquette.createProjector()
 
+    @dialogs     = new Dialogs      {@projector, el: "body"}
     @stats       = new Stats        {@projector, el: ".stats"}
     @queues      = new Queues       {@projector, el: ".teaser", @baseUrl}
     @filters     = new Filters      {@projector, el: ".current.filters"}
@@ -82,6 +82,7 @@ class ElBorrachoUI extends Spine.Controller
     @start()
 
   bindEvents: ->
+    @dialogs.on     "error", @error
     @stats.on       "error", @error
     @queues.on      "error", @error
     @filters.on     "error", @error
@@ -93,6 +94,18 @@ class ElBorrachoUI extends Spine.Controller
 
   start: ->
     @queues.updateEvery15Seconds()
+
+  error: (args...) =>
+    console.error args...
+
+    [err]   = args
+    message = switch
+      when err instanceof Error and err.xhr?.readyState is 0 and err.message.trim() is "" or "error"
+        "Network error"
+      else
+        err.toString()
+
+    @dialogs.add message
 
 
 module.exports = ElBorrachoUI
