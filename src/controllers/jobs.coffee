@@ -1,10 +1,15 @@
 Spine    = require "spine"
 Maquette = require "maquette"
+errify   = require "errify"
 Mapper   = require "./mapper"
 
 
 class JobMapper extends Mapper
   identify: (record) -> record.queue + record.id
+
+
+disable = (element) ->
+  ($ element).attr disabled: "disabled"
 
 
 class JobsController extends Spine.Controller
@@ -33,10 +38,26 @@ class JobsController extends Spine.Controller
   selectAllOfState: ->
   beginFadeToSelected: ->
   endFadeToSelected: ->
-  showControlsOrSelect: ->
+  showControlsOrSelect: (e) ->
+    $job = ($ e.target).closest ".job"
+    $job.siblings().removeClass "focus"
+    $job.addClass "focus"
 
-  delete: ->
-  makePending: ->
+  delete: (e) ->
+    ideally = errify @error
+    $job = ($ e.target).closest ".job"
+    {id} = $job.data()
+    record = @Store.find id
+    await record.destroy ideally defer()
+    disable e.target
+
+  makePending: (e) ->
+    ideally = errify @error
+    $job = ($ e.target).closest ".job"
+    {id} = $job.data()
+    record = @Store.find id
+    await record.promote ideally defer()
+    disable e.target
 
   confirmMultiAction: ->
   cancelMultiAction: ->
@@ -74,8 +95,11 @@ class JobsController extends Spine.Controller
     "touchstart .job":                    "beginFadeToSelected"
     "touchend .job":                      "endFadeToSelected"
     "longpress .job":                     "selectOrExtendSelection"
+    "click .job":                         "showControlsOrSelect"
     "tap .job":                           "showControlsOrSelect"
+    "click .job .delete":                 "delete"
     "tap .job .delete":                   "delete"
+    "click .job .promote":                "makePending"
     "tap .job .promote":                  "makePending"
     "tap .job .confirmorcancel .confirm": "confirmMultiAction"
     "tap .job .confirmorcancel .cancel":  "cancelMultiAction"

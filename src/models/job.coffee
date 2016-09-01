@@ -5,12 +5,6 @@ Filter = require "./filter"
 {Ajax} = Spine
 
 
-awaitGet = (options, callback) ->
-  await Ajax.awaitGet options, defer status, xhr, statusText, data
-  return callback statusText, data, xhr unless status is "success"
-  callback null, data, xhr
-
-
 class Job extends Spine.Model
   @configure "Job",
     "queue",
@@ -45,17 +39,17 @@ class Job extends Spine.Model
 
       if @filters.ids.length then for id in @filters.ids
         url = "#{base}/#{id}"
-        await awaitGet {url}, defer err, jobs
+        await Ajax.awaitGet {url}, defer err, jobs
         allJobs = allJobs.concat jobs unless err
 
       else if @filters.states.length then for state in @filters.states
         url = "#{base}/#{state}"
-        await awaitGet {url}, ideally defer jobs
+        await Ajax.awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
       else
         url = base
-        await awaitGet {url}, ideally defer jobs
+        await Ajax.awaitGet {url}, ideally defer jobs
         allJobs = allJobs.concat jobs
 
     @refresh allJobs, clear: true
@@ -108,5 +102,22 @@ class Job extends Spine.Model
 
   dataFormattedForDisplay: =>
     ("#{key}: #{value}" for key, value of @data).join ", "
+
+  destroy: (callback) ->
+    ideally   = errify callback
+    {baseUrl} = @constructor
+    url       = "#{baseUrl}/#{@queue}/#{@q_id}"
+    data      = _method: "delete"
+    await Ajax.awaitPost {url, data}, ideally defer()
+    super
+    callback()
+
+  promote: (callback) ->
+    ideally   = errify callback
+    {baseUrl} = @constructor
+    url       = "#{baseUrl}/#{@queue}/#{@q_id}/pending"
+    await Ajax.awaitGet {url}, ideally defer()
+    callback()
+
 
 module.exports = Job
