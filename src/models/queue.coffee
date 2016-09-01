@@ -1,4 +1,6 @@
 Spine = require "spine"
+__    = require "spine-awaitajax"
+__    = require "spine-awaitajax/spine.awaitajax"
 
 
 class Queue extends Spine.Model

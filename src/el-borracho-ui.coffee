@@ -1,6 +1,4 @@
 Spine    = require "spine"
-__       = require "spine-awaitajax"
-__       = require "spine-awaitajax/spine.awaitajax"
 Maquette = require "maquette"
 
 
