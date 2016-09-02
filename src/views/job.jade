@@ -1,5 +1,12 @@
 -
-  classes = {}
+  classes = {
+    active: false,
+    wait: false,
+    completed: false,
+    delayed: false,
+    failed: false,
+    stuck: false
+  }
   classes[state] = true
 
 li.job(classes=classes id="job-#{id}" key=id data-id=id)
