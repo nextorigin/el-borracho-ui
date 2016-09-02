@@ -118,7 +118,6 @@ class JobsController extends Spine.Controller
 
     @Store.baseUrl = baseUrl
     @Page.setup()
-    @page = @Page.first()
 
     @projector or= Maquette.createProjector()
     @jobMap      = new JobMapper [], @jobView
@@ -151,6 +150,8 @@ class JobsController extends Spine.Controller
     totalJobs = jobs.length
     height  = @el.height()
     width   = @el.width()
+    columnWidth = @columnWidth
+    columnWidth = width if width < columnWidth
     rows    = Math.floor height / @rowHeight
     columns = Math.ceil (width + 22) / columnWidth
     visible = rows * Math.floor (width + 22) / columnWidth
@@ -165,12 +166,13 @@ class JobsController extends Spine.Controller
       renderTotal = totalJobs
       pages       = 1
 
-    {current,max} = @page
-    @page.current = pages if @page.current > pages
-    @page.max     = pages
-    @page.save() if @page.current isnt current or @page.max isnt max
+    page          = @Page.first()
+    {current,max} = page
+    page.current  = pages if page.current > pages
+    page.max      = pages
+    page.save() if page.current isnt current or page.max isnt max
 
-    start         = (@page.current - 1) * visible
+    start         = (page.current - 1) * visible
     end           = start + (renderTotal - 1)
 
     @jobMap.update jobs[start..end]

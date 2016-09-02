@@ -161,6 +161,49 @@
   nav.pages { padding-top: 15px; }
 }
 
+@media screen and (max-width: 719px) {
+  section.dialog-box,
+  figure.stats,
+  header { margin-left: 0; margin-right: 0; }
+  nav.pages { margin-left: 5px; margin-right: 5px; }
+  section.jobs { margin-left: 10px; margin-right: 0; }
+  nav.add.filters { right: 8px; }
+  nav.add.filters.show { right: 18px; }
+  .addfilters-stage button.showadd { margin-right: 8px; }
+  nav.filters li { margin: 0 2px 0 0; }
+  nav.current.filters { left: 237px; }
+  nav.pages { padding-top: 15px; }
+
+  figure.stats .teaser .totals { font-size: 0.6em; padding-top: 1px; }
+  header h1 { font-size: 2.2em; margin-top: 15px; margin-left: 5px; letter-spacing: -0.06em; }
+  header button.loadingspinner { left: 164px; top: 30px; font-size: 1.4em; }
+}
+
+@media screen and (max-width: 413px) {
+  nav.current.filters { left: 206px; }
+}
+
+@media screen and (max-width: 374px) {
+  nav.current.filters { left: 192px; }
+
+  header h1 { font-size: 2em; margin-top: 17px; }
+  header button.loadingspinner { left: 164px; top: 28px; font-size: 1.4em; }
+}
+
+@media screen and (max-width: 359px) {
+  figure.stats .teaser .totals { font-size: 0.6em; padding-top: 1px; }
+  header { margin-top: 10px; }
+  header h1 { font-size: 1.6em; margin-top: 23px; letter-spacing: -0.06em; }
+  header button.loadingspinner { top: 29px; left: 133px; font-size: 1.2em; }
+  nav.filters li { width: 127px; }
+  nav.current.filters { left: 160px; }
+  .addfilters-stage button.showadd { top: 45px; }
+  nav.add.filters { top: 38px; }
+  nav.add.filters.show { top: 15px; }
+
+  section.jobs li { width: 297px; }
+}
+
   </style>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
   <script src="./js/el-borracho-ui.js" type="text/javascript" charset="utf-8"></script>
