@@ -114,7 +114,7 @@
   .addfilters-mask { background: white; opacity: 0; visibility: hidden; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 200; transition: visibility 0s linear 0.5s, opacity 0.5s linear; }
   .addfilters-mask.show { opacity: 0.7; visibility: visible; transition: opacity 0.2s linear; }
 
-  section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 90px); min-height: calc(100% - 20px - 77px - 90px); }
+  section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 120px); min-height: calc(100% - 20px - 77px - 120px); }
   section.jobs ul { display: inline-flex; flex-flow: column wrap; align-items: flex-start; max-height: 100%; width: 100%; overflow: hidden; align-content: flex-start; }
   section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; overflow: hidden; margin: 0 22px 3px 0; }
   section.jobs li h3 { font-size: 0.9em; margin: 0; }
@@ -127,6 +127,16 @@
   section.jobs li.job.active nav.actions button.promote { visibility: hidden; }
   section.jobs li.job.wait   nav.actions button.promote { visibility: hidden; }
   section.jobs li.job.completed nav.actions button.promote { visibility: hidden; }
+
+  nav.pages { min-height: 60px; margin: 10px 55px 0; box-sizing: border-box; display: flex; flex-flow: row wrap; justify-content: flex-end; align-items: flex-start; visibility: hidden; opacity: 0; transition: visibility 0s, opacity 0.2s linear; }
+  nav.pages.show { visibility: visible; opacity: 1; }
+  nav.pages button { font-size: 1.4em; top: 0; height: 26px; top: -5px; padding: 2px 6px 3px; color: #aaa; }
+  nav.pages button:disabled { color: #ccc; }
+  nav.pages .numbers { display: flex; align-items: center; font-size: 0.9em; font-weight: bold; height: 16px; }
+  nav.pages .numbers a, nav.pages .numbers strong { padding: 0 0.3em; }
+  nav.pages .numbers a { cursor: pointer; color: #aaa; }
+  nav.pages .numbers strong { color: #000; }
+  nav.pages button.previous { transform: rotate(180deg); }
 
   .filter.queue, .job.queue .label { background: #00aeef; }
   .filter.wait, .job.wait .label { background: #a186be; }
@@ -141,12 +151,14 @@
   section.dialog-box,
   figure.stats,
   header,
+  nav.pages,
   section.jobs { margin-left: 30px; margin-right: 30px; }
   nav.add.filters { right: 30px; }
   nav.add.filters.show { right: 40px; }
   .addfilters-stage button.showadd { margin-right: 30px; }
   nav.filters li { margin: 0 2px 0 0; }
   nav.current.filters { left: 365px; }
+  nav.pages { padding-top: 15px; }
 }
 
   </style>

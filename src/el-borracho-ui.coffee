@@ -67,6 +67,7 @@ class ElBorrachoUI extends Spine.Controller
     AddFilters   = require "./controllers/add-filters"
     QFilters     = require "./controllers/queue-filters"
     Jobs         = require "./controllers/jobs"
+    Pages        = require "./controllers/pages"
 
     @projector   = Maquette.createProjector()
 
@@ -77,6 +78,7 @@ class ElBorrachoUI extends Spine.Controller
     @addfilters  = new AddFilters   {@projector, el: ".add.filters"}
     @qfilters    = new QFilters     {@projector, el: ".add.filters .queue.filters"}
     @jobs        = new Jobs         {@projector, el: ".jobs", @baseUrl}
+    @pages       = new Pages        {@projector, el: "body"}
 
     @bindEvents()
     @start()
@@ -89,6 +91,7 @@ class ElBorrachoUI extends Spine.Controller
     @addfilters.on  "error", @error
     @qfilters.on    "error", @error
     @jobs.on        "error", @error
+    @pages.on       "error", @error
 
     @filters.Store.on "change", @jobs.refresh
 

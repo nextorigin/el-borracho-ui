@@ -1,0 +1,25 @@
+-
+  classes   = {show: page.max > 1}
+  firstpage = page.current === 1
+  lastpage  = page.current === page.max
+
+nav.pages(classes=classes)
+  if firstpage
+    button.icon.previous(disabled="disabled") =
+  else
+    button.icon.previous(disabled=null) =
+
+  - i = 1
+  nav.numbers
+    while i < page.max + 1
+      - isCurrent = i === page.current
+      if isCurrent
+        strong(key=i) #{i}
+      else
+        a(key=i) #{i}
+      - i++
+
+  if lastpage
+    button.icon.next(disabled="disabled") =
+  else
+    button.icon.next(disabled=null) =

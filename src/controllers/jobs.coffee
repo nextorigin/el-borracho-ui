@@ -112,10 +112,14 @@ class JobsController extends Spine.Controller
 
     @Store     = require "../models/job"
     @Queue     = require "../models/queue"
+    @Page      = require "../models/page"
     @view      = require "../views/jobs"
     @jobView   = require "../views/job"
 
     @Store.baseUrl = baseUrl
+    @Page.setup()
+    @page = @Page.first()
+
     @projector or= Maquette.createProjector()
     @jobMap      = new JobMapper [], @jobView
 
@@ -130,8 +134,7 @@ class JobsController extends Spine.Controller
     @updateEvery20Seconds()
 
   rowHeight: 64
-  columnWidth: 350
-  currentPage: 1
+  columnWidth: 343 + 22
 
   render: =>
     @log "rendering"
@@ -149,22 +152,26 @@ class JobsController extends Spine.Controller
     height  = @el.height()
     width   = @el.width()
     rows    = Math.floor height / @rowHeight
-    columns = Math.ceil width / @columnWidth
+    columns = Math.ceil (width + 22) / columnWidth
+    visible = rows * Math.floor (width + 22) / columnWidth
 
-    renderTotal = remaining = pages = 0
+    renderTotal = pages = 0
     renderMax   = rows * columns
 
-    if totalJobs > renderMax
+    if totalJobs > visible
       renderTotal = renderMax
-      pages       = Math.ceil totalJobs / renderMax
+      pages       = Math.ceil totalJobs / visible
     else
       renderTotal = totalJobs
       pages       = 1
 
-    @currentPage = pages if @currentPage > pages
-    @pages       = pages
-    start        = (@currentPage - 1) * renderMax
-    end          = start + (renderTotal - 1)
+    {current,max} = @page
+    @page.current = pages if @page.current > pages
+    @page.max     = pages
+    @page.save() if @page.current isnt current or @page.max isnt max
+
+    start         = (@page.current - 1) * visible
+    end           = start + (renderTotal - 1)
 
     @jobMap.update jobs[start..end]
     @view {jobs: @jobMap.components}
