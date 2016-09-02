@@ -2,7 +2,7 @@
   classes = {}
   classes[state] = true
 
-li(class="job" classes=classes id="job-#{id}" key=id data-id=id)
+li.job(classes=classes id="job-#{id}" key=id data-id=id)
   h3.id #{queue} #{q_id}
   span.data= dataFormattedForDisplay()
   div.label
@@ -10,3 +10,6 @@ li(class="job" classes=classes id="job-#{id}" key=id data-id=id)
   nav.actions
     button.icon.promote @
     button.icon.delete Â
+
+  figure.progress(styles={width: "calc(#{progress}% - 11px)"})
+    figcaption #{progress}%

@@ -127,6 +127,8 @@
   section.jobs li.job.active nav.actions button.promote { visibility: hidden; }
   section.jobs li.job.wait   nav.actions button.promote { visibility: hidden; }
   section.jobs li.job.completed nav.actions button.promote { visibility: hidden; }
+  section.jobs li figure.progress { position: absolute; left: 0; top: 0; width: 0; height: 61px; background: rgba(0, 0, 0, 0.1); margin: 0; }
+  section.jobs li figure.progress figcaption { visibility: hidden; }
 
   nav.pages { min-height: 60px; margin: 10px 55px 0; box-sizing: border-box; display: flex; flex-flow: row wrap; justify-content: flex-end; align-items: flex-start; visibility: hidden; opacity: 0; transition: visibility 0s, opacity 0.2s linear; }
   nav.pages.show { visibility: visible; opacity: 1; }
