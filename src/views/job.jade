@@ -1,4 +1,8 @@
 -
+  roundToTwo = function (num) {
+    return +(Math.round(num + "e+2") + "e-2")
+  }
+
   classes = {
     active: false,
     wait: false,
@@ -9,15 +13,39 @@
   }
   classes[state] = true
 
+  styles = progress ? {width: "calc(" + progress + "% - 11px)"} : {width: null}
+
+  attemptsstr  = attempts ? attemptsMade + "/" + attempts : "?"
+  delaystring  = "? delay"
+  if (delay !== null && delay !== undefined) {
+    rounded      = roundToTwo(delay / 1000)
+    minutes      = rounded % 60
+    seconds      = rounded - minutes * 60
+    delaystring  = (delay === 0) ? "no delay" : minutes + "m " + seconds + "s delay"
+  }
+  datestring   = date ? date.toUTCString() : ""
+  stacktracestr = stacktrace ? stacktrace : ""
+
 li.job(classes=classes id="job-#{id}" key=id data-id=id)
   h3.id #{queue} #{q_id}
   span.data= dataFormattedForDisplay()
-  span.stacktrace #{stacktrace}
-  div.label
+
+  figure.progress(styles=styles)
+    figcaption #{progress}%
+
+  span.attempts #{attemptsstr} attempts
+  span.date #{datestring}
+  span.delay #{delaystring}
+
+  dl.data-long
+    each key in Object.keys(data).sort()
+      dt #{key}
+      dd #{data[key]}
+
+  span.stacktrace #{stacktracestr}
 
   nav.actions
     button.icon.promote @
     button.icon.delete Â
 
-  figure.progress(styles={width: "calc(#{progress}% - 11px)"})
-    figcaption #{progress}%
+  div.label

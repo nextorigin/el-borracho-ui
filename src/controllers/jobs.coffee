@@ -63,7 +63,9 @@ class JobsController extends Spine.Controller
   cancelMultiAction: ->
 
   showStackTrace: ->
-  showDetail: ->
+  showDetail: (e) ->
+    $job = ($ e.target).closest ".job"
+    $job.toggleClass "expanded"
 
   pulseSpinner: =>
     @loadingspinner.addClass("pulse")
@@ -105,6 +107,8 @@ class JobsController extends Spine.Controller
     "tap .job .confirmorcancel .cancel":  "cancelMultiAction"
     "tap .job.failed .stacktrace":        "showStackTrace"
     "doubletap .job":                     "showDetail"
+    "click .job .id":                     "showDetail"
+    "dblclick .job":                      "showDetail"
 
   constructor: ({baseUrl}) ->
     @log "constructing"

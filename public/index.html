@@ -116,22 +116,47 @@
 
   section.jobs { position: relative; margin: 20px 55px 0; height: calc(100% - 20px - 77px - 120px); min-height: calc(100% - 20px - 77px - 120px); }
   section.jobs ul { display: inline-flex; flex-flow: column wrap; max-height: 100%; height: 100%; width: 100%; overflow: hidden; align-content: flex-start; }
-  section.jobs li { position: relative; width: 343px; height: 61px; box-sizing: border-box; background: white; list-style-type: none; overflow: hidden; margin: 0 22px 3px 0; }
-  section.jobs li h3 { font-size: 0.9em; margin: 0; }
-  section.jobs li span { font-size: 0.9em; }
-  section.jobs li .label { position: absolute; top: 0; right: 0; bottom: 0; width: 11px; }
-  section.jobs li nav.actions { visibility: hidden; position: absolute; top: 0; right: 15px; bottom: 0; width: 20px; opacity: 0; transition: visibility 0s, opacity 0.2s linear; }
+  section.jobs li { position: relative; width: 343px; min-height: 61px; max-height: 61px; box-sizing: border-box; background: white; list-style-type: none; overflow: hidden; margin: 0 22px 3px 0; }
+  section.jobs li h3 { font-size: 0.9em; margin: 0; cursor: pointer; display: inline-block; transition: font-size 0.08s ease-out; }
+  section.jobs li span { font-size: 0.9em; line-height: 1.25em; }
+  section.jobs li .label { position: absolute; top: 0; right: 0; bottom: 0; width: 11px; z-index: 20; }
+  section.jobs li nav.actions { visibility: hidden; position: absolute; top: 0; right: 15px; bottom: 0; width: 20px; display: flex; flex-flow: column nowrap; opacity: 0; transition: visibility 0s, opacity 0.2s linear; }
   section.jobs li.focus nav.actions { visibility: visible; opacity: 1; }
-  section.jobs li nav.actions button { float: left; height: 22px; width: 22px; color: #bbb; font-size: 1.3em; padding: 0; }
-  section.jobs li nav.actions button.delete { margin-top: 13px; font-size: 1.5em; }
-  section.jobs li.job.active nav.actions button.promote { visibility: hidden; }
-  section.jobs li.job.wait   nav.actions button.promote { visibility: hidden; }
+  section.jobs li nav.actions button { height: 22px; width: 22px; color: #bbb; font-size: 1.3em; padding: 0; }
+  section.jobs li nav.actions button.delete { margin: auto 1px 2px 0; font-size: 1.5em; }
+  section.jobs li.job.active nav.actions button.promote,
+  section.jobs li.job.wait   nav.actions button.promote,
   section.jobs li.job.completed nav.actions button.promote { visibility: hidden; }
-  section.jobs li .stacktrace { visibility: hidden; background: #FFF; color: #ed145b; font: 1em monospace;}
-  section.jobs li.failed .stacktrace { visibility: visible; }
-  section.jobs li.failed .data { height: 1.1em; display: block; }
-  section.jobs li figure.progress { position: absolute; left: 0; top: 0; width: 0; height: 61px; background: rgba(0, 0, 0, 0.1); margin: 0; }
-  section.jobs li figure.progress figcaption { visibility: hidden; }
+  section.jobs li .data { display: block; }
+  section.jobs li .stacktrace { visibility: hidden; color: #ed145b; font: 1em monospace; }
+  section.jobs li.failed .stacktrace { visibility: visible; display: block; margin-top: 0.2em; height: 1.2em; overflow: hidden; }
+  section.jobs li.failed .data { height: 1.25em; overflow: hidden; }
+  section.jobs li figure.progress { position: absolute; left: 0; top: 0; width: 0; height: 61px; background: rgba(0, 0, 0, 0.1); margin: 0; z-index: 1; }
+  section.jobs li h3,
+  section.jobs li .data,
+  section.jobs li .stacktrace { position: relative; z-index: 10; }
+  section.jobs li .data-long,
+  section.jobs li figure.progress figcaption,
+  section.jobs li .attempts,
+  section.jobs li .date,
+  section.jobs li .delay { visibility: hidden; display: none; }
+  section.jobs li .attempts { font-weight: bold; }
+  section.jobs li.expanded { max-height: 1600px; padding-bottom: 0.55em; transition: max-height 1s linear 0.2s; }
+  section.jobs li.expanded .data { visibility: hidden; display: none; }
+  section.jobs li.expanded .data-long,
+  section.jobs li.expanded figure.progress figcaption,
+  section.jobs li.expanded .attempts,
+  section.jobs li.expanded .date,
+  section.jobs li.expanded .delay,
+  section.jobs li.expanded .stacktrace { visibility: visible; display: block; }
+  section.jobs li.expanded h3 { font-size: 1.1em; transition: font-size 0.1s ease-out; }
+  section.jobs li.expanded dl.data-long { margin: 1em 0; }
+  section.jobs li.expanded dl.data-long dt { margin: 0; display: inline; font-size: 0.9em; }
+  section.jobs li.expanded dl.data-long dd { margin: 0; padding-left: 0.5em; display: inline; font: 1.1em monospace; color: #aaa; }
+  section.jobs li.expanded dl.data-long dd::after { content: "\A"; white-space: pre; }
+  section.jobs li.expanded figure.progress { position: relative; margin: 0.55em 0; width: 2px; transition: width 0.3s linear; display: flex; }
+  section.jobs li.expanded figure.progress figcaption { margin: auto 10px; font-size: 1.45em; font-weight: bold; }
+  section.jobs li.expanded .stacktrace { white-space: pre; margin-top: 0.55em; height: auto; }
 
   nav.pages { min-height: 60px; margin: 10px 55px 0; box-sizing: border-box; display: flex; flex-flow: row wrap; justify-content: flex-end; align-items: flex-start; visibility: hidden; opacity: 0; transition: visibility 0s, opacity 0.2s linear; }
   nav.pages.show { visibility: visible; opacity: 1; }

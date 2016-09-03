@@ -12,7 +12,12 @@ class Job extends Spine.Model
     "state",
     "data",
     "progress",
-    "stacktrace"
+    "stacktrace",
+    "attempts",
+    "attemptsMade",
+    "timestamp",
+    "date",
+    "delay"
 
   @filters:
     queues: []
@@ -98,7 +103,13 @@ class Job extends Spine.Model
   constructor: (attributes) ->
     attributes.q_id = attributes.id
     attributes.id   = "#{attributes.queue}-#{attributes.id}"
+    attributes.progress     ?= 0
+    attributes.attempts     ?= "?"
+    attributes.attemptsMade ?= "?"
     super attributes
+
+  timestamp: (timestamp) ->
+    @date = new Date timestamp
 
   dataFormattedForDisplay: =>
     ("#{key}: #{value}" for key, value of @data).join ", "
