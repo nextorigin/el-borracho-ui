@@ -31,7 +31,7 @@ class QueuesController extends Spine.Controller
         totals[state] ?= 0
         totals[state] += total
 
-    totals = {active: "...", wait: "...", completed: "...", delayed: "...", failed: "..."} unless Object.keys(totals).length
+    totals = {active: "...", wait: "...", completed: "...", delayed: "...", failed: "...", stuck: "..."} unless Object.keys(totals).length
     @view {totals}
 
   updateEvery15Seconds: ->
