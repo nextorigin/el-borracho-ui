@@ -4,6 +4,11 @@ errify   = require "errify"
 Mapper   = require "./mapper"
 
 
+debounce = (fn, timeout, timeoutID = -1) -> ->
+  if timeoutID > -1 then window.clearTimeout timeoutID
+  timeoutID = window.setTimeout fn, timeout
+
+
 class JobMapper extends Mapper
   identify: (record) -> record.queue + record.id
 
@@ -131,6 +136,9 @@ class JobsController extends Spine.Controller
     @Store.on "error", @error
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
+
+    @debouncedRender = debounce @projector.scheduleRender, 125
+    ($ window).resize @debouncedRender
 
     @loadingspinner = $ ".loadingspinner"
 
