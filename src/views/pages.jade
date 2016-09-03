@@ -5,9 +5,9 @@
 
 nav.pages(classes=classes)
   if firstpage
-    button.icon.previous(disabled="disabled") =
+    button.icon.previous(title="previous page" disabled="disabled") =
   else
-    button.icon.previous(disabled=null) =
+    button.icon.previous(title="previous page" disabled=null) =
 
   - i = 1
   nav.numbers
@@ -20,6 +20,6 @@ nav.pages(classes=classes)
       - i++
 
   if lastpage
-    button.icon.next(disabled="disabled") =
+    button.icon.next(title="next page" disabled="disabled") =
   else
-    button.icon.next(disabled=null) =
+    button.icon.next(title="next page" disabled=null) =
