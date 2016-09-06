@@ -30,6 +30,9 @@ class ElBorrachoUI extends Spine.Controller
     @jobs        = new Jobs         {@projector, el: ".jobs", @baseUrl}
     @pages       = new Pages        {@projector, el: "body"}
 
+    @Tubes         = require "./models/tubes"
+    @Tubes.baseUrl = @baseUrl
+
     @bindEvents()
     @start()
 
@@ -43,11 +46,13 @@ class ElBorrachoUI extends Spine.Controller
     @jobs.on        "error", @error
     @pages.on       "error", @error
 
-    @filters.Store.on "change", @jobs.refresh
+    @Tubes.on       "error", @error
 
   start: ->
-    @queues.updateEvery15Seconds()
-    @jobs.updateEvery20Seconds()
+    @queues.Store.fetch()
+
+    @filters.Store.on "change", @Tubes.refresh
+    @Tubes.listen()
 
   error: (args...) =>
     console.error args...

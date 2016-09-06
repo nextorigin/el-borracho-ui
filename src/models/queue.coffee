@@ -16,6 +16,12 @@ class Queue extends Spine.Model
   @extend Spine.Model.Ajax
   @url: "/jobs"
 
+  @createFromEvent: (e) =>
+    try
+      @refresh e.data
+    catch e
+      return @trigger "error", e
+
   @names: ->
     (queue.name() for queue in @all())
 

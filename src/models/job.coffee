@@ -100,6 +100,17 @@ class Job extends Spine.Model
       @byVal a, aQueue, b, bQueue
     else 0
 
+  @createFromEvent: (e) =>
+    try
+      @refresh e.data
+      @lru()
+    catch e
+      return @trigger "error", e
+
+  @lru: ->
+    record.destroy() for record in @records[0..100] if @count() > 10000
+    return
+
   constructor: (attributes) ->
     attributes.q_id = attributes.id
     attributes.id   = "#{attributes.queue}-#{attributes.id}"
