@@ -8,7 +8,7 @@ TODO:
   style jobs in columns
     line wrap?
     stacktrace?
-    promote/delete buttons
+    promote/delete buttons ✓
     fix wrapper height ✓
     progress bar background
   multi-select
@@ -28,8 +28,13 @@ TODO:
   theme graph with much prettier colors ✓
   fix legend ✓
 
-  job sort always leaving something at index 1
-  pagination
+  job sort always leaving something at index 1 ✓
+  pagination ✓
+
+  customizable title
+
+  individual views .expanded class
+    "click .job title": "toggle .expanded"
 
   /:queue/:count streams ?
 
