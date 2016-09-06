@@ -2,61 +2,6 @@ Spine    = require "spine"
 Maquette = require "maquette"
 
 
-###
-TODO:
-  style header with stats ✓
-  style jobs in columns
-    line wrap?
-    stacktrace?
-    promote/delete buttons ✓
-    fix wrapper height ✓
-    progress bar background
-  multi-select
-  style labels with colors and delete button ✓
-    fix completed delete button ✓
-  style add dialog ✓
-    redo animations in css ✓
-  style loading icon ✓
-    add pulse animation when refreshing ✓
-
-  fix sse-stream ✓
-    add test ✓
-  add graph CSS ✓
-    later figure out how much we can strip
-  fix axis/grid ✓
-    do we really need a separate element ✓
-  theme graph with much prettier colors ✓
-  fix legend ✓
-
-  job sort always leaving something at index 1 ✓
-  pagination ✓
-
-  customizable title
-
-  individual views .expanded class
-    "click .job title": "toggle .expanded"
-
-  /:queue/:count streams ?
-
-  /:queue/:state streams
-    then /:queue/?states=[...] can be combos of state streams
-      normalize order of array in originalUrl so that caching works (sort then toString)
-
-
-  webfont substitutes for helvetica ✓
-
-  ipad styling
-    give filter labels more room less margin ✓
-    graphs overflow stats bounding box ✓
-    more specific flex CSS ✓
-      reduce loading icon margin ✓
-      reduce border margin try to fit two whole columns in portrait ✓
-      provide hint of color for job state when column overflows container
-      reduce label margins so 4 filter labels can fit in portrait ✓
-
-###
-
-
 class ElBorrachoUI extends Spine.Controller
   logPrefix: "(ElBorracho)"
 
