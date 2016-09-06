@@ -59,6 +59,32 @@ class Job extends Spine.Model
 
     @refresh allJobs, clear: true
 
+  @filtered: ->
+    jobs = []
+
+    @updateFilters()
+
+    for queue in @filters.queues
+      if @filters.ids.length then for id in @filters.ids
+        somejobs = @findAllByAttribute "q_id", Number id
+        jobs     = jobs.concat somejobs if somejobs?
+
+      else if @filters.states.length then for state in @filters.states
+        somejobs = @findAllByAttribute "state", state
+        jobs     = jobs.concat somejobs if somejobs?
+
+      else
+        jobs     = @all()
+
+    if @filters.data.length then for data in @filters.data
+      [key, value] = data.split ":"
+      key          = key.trim()
+      value        = value.trim()
+      matcher      = new RegExp value
+      jobs         = (job for job in jobs when job.data[key]?.toString().match matcher)
+
+    jobs
+
   @filterData: (key, value) ->
     matcher = new RegExp value
     @select (record) -> record.data[key]?.toString().match matcher
