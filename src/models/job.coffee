@@ -128,10 +128,17 @@ class Job extends Spine.Model
 
   @createFromEvent: (e) =>
     try
-      @refresh e.data
-      @lru()
+      jobs = JSON.parse e.data
     catch e
       return @trigger "error", e
+
+    if state = jobs.state or jobs[0].state
+      if state in ["active", "wait"]
+        oldJobs = @findAllByAttribute "state", state
+        job.remove clear: true for job in oldJobs
+
+    @refresh jobs
+    @lru()
 
   @lru: ->
     record.destroy() for record in @records[0..100] if @count() > 10000
