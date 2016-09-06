@@ -97,6 +97,7 @@ class ElBorrachoUI extends Spine.Controller
 
   start: ->
     @queues.updateEvery15Seconds()
+    @jobs.updateEvery20Seconds()
 
   error: (args...) =>
     console.error args...

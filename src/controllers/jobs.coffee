@@ -142,8 +142,6 @@ class JobsController extends Spine.Controller
 
     @loadingspinner = $ ".loadingspinner"
 
-    @updateEvery20Seconds()
-
   rowHeight: 64
   columnWidth: 343 + 22
 
