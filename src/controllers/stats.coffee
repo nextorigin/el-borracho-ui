@@ -25,8 +25,6 @@ class StatsController extends Spine.Controller
     @graph.on       "error", @error
     @history.on     "error", @error
 
-    @history.Store.fetch()
-
   show: ->
     @el.addClass "show"
     @graph.start()

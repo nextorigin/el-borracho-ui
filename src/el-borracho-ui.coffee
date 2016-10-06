@@ -49,6 +49,7 @@ class ElBorrachoUI extends Spine.Controller
     @Tubes.on       "error", @error
 
   start: ->
+    @stats.history.Store.fetch()
     @queues.Store.fetch()
 
     @filters.Store.on "change", @Tubes.refresh
