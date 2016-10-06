@@ -11,14 +11,6 @@ Realtime and historical statistics (from el-borracho-stats) are visualized throu
 
 All realtime data is read through Server-Sent-Events by default.
 
-## El Borracho Pro
-
-el-borracho-ui is free and open-source software and will always be.  For companies and enterprises who need support and additional features, El Borracho Pro is available [here].
-
-## Demo
-
-A full working example of El Borracho, including stats, graphs, and UI can be found [here].  Source code is also available [on github].
-
 ## Installation
 
 ### NodeJS
@@ -26,14 +18,6 @@ A full working example of El Borracho, including stats, graphs, and UI can be fo
 ```sh
 npm install --save el-borracho-ui
 ```
-
-### Static fileserver
-
-Download the package [from github].  Serve with your favorite fileserver.
-
-## Usage (Programmatic)
-
-## Usage (UI)
 
 ## License
 
