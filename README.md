@@ -1,7 +1,13 @@
 # el-borracho-ui
 
+[![Dependency Status][dependency]][david]
+[![devDependency Status][dev-dependency]][david-dev]
+[![Downloads][downloads]][npm]
+
 Realtime Web UI for Bull job queue that pulls from El Borracho REST+SSE API.
 Compatible with touch and mobile.
+
+[![NPM][npm-stats]][npm]
 
 ## Introduction
 
@@ -22,3 +28,11 @@ npm install --save el-borracho-ui
 ## License
 
 MIT
+
+  [dependency]: https://img.shields.io/david/nextorigin/el-borracho-ui.svg?style=flat-square
+  [david]: https://david-dm.org/nextorigin/el-borracho-ui
+  [dev-dependency]: https://img.shields.io/david/dev/nextorigin/el-borracho-ui.svg?style=flat-square
+  [david-dev]: https://david-dm.org/nextorigin/el-borracho-ui?type=dev
+  [downloads]: https://img.shields.io/npm/dm/el-borracho-ui.svg?style=flat-square
+  [npm]: https://www.npmjs.org/package/el-borracho-ui
+  [npm-stats]: https://nodei.co/npm/el-borracho-ui.png?downloads=true&downloadRank=true&stars=true
