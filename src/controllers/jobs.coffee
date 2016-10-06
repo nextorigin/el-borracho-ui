@@ -79,34 +79,11 @@ class JobsController extends Spine.Controller
                    .delay(320).queue -> ($ @).removeClass("pulse").dequeue()
                    .delay(240).queue -> ($ @).addClass("pulse").dequeue()
                    .delay(320).queue -> ($ @).removeClass("pulse").dequeue()
-  ###
-
-  longpress to select many
-  longpress job
-    this turns on multi select
-    subsequent taps add to selection
-    subsequent long press extends selection through target
-    tapping action on any job triggers action for all selected jobs
-  longpress label
-    selects all of label type
-    does not enable multi select
-    enables *ByState and *ByQueue operations
-    cant remove any label when any label is selected
-
-  ###
 
   events:
-    "tap .loadingspinner":                "togglePause"
-    "longpress .filter.queue":            "selectAllOfQueue"
-    "longpress .filter.state":            "selectAllOfState"
-    "touchstart .job":                    "beginFadeToSelected"
-    "touchend .job":                      "endFadeToSelected"
-    "longpress .job":                     "selectOrExtendSelection"
     "click .job":                         "showControlsOrSelect"
     "click .job .delete":                 "delete"
     "click .job .promote":                "makePending"
-    "tap .job .confirmorcancel .confirm": "confirmMultiAction"
-    "tap .job .confirmorcancel .cancel":  "cancelMultiAction"
     "click .job .id":                     "showDetail"
     "dblclick .job":                      "showDetail"
 

@@ -22,8 +22,6 @@ class QueueFiltersController extends Spine.Controller
     @Store.on "change", @projector.scheduleRender
     @projector.append @el[0], @render
 
-    # @default()
-
   render: =>
     @log "rendering"
     queues  = @Store.names()
