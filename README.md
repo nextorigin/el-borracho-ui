@@ -1,8 +1,7 @@
 # el-borracho-ui
 
 Realtime Web UI for Bull job queue that pulls from El Borracho REST+SSE API.
-
-[screenshot]
+Compatible with touch and mobile.
 
 ## Introduction
 

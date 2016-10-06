@@ -1,7 +1,7 @@
 {
   "name": "el-borracho-ui",
   "version": "1.0.0",
-  "description": "Web UI for el-borracho",
+  "description": "Realtime Web UI for Bull job queue that pulls from El Borracho REST+SSE API, compatible with touch and mobile",
   "main": "lib/el-borracho-ui.js",
   "scripts": {
     "test": "npm run test:modules && npm run test:coverage",
