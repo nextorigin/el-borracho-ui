@@ -11,9 +11,11 @@ Compatible with touch and mobile.
 
 ## Introduction
 
-el-borracho-ui is designed to be an intuitive and powerful client for Bull job queue.  All jobs can be fully managed through the UI, which displays job state, data, progress, and stacktrace for failed jobs.  Waiting/delayed/failed jobs may be promoted/re-queued and any job can be deleted.  Jobs may be filtered by queue, state, id, or job data. el-borracho-ui gives a full overview of the health and state of the queue(s) in a single page.
+**el-borracho-ui** is designed to be an intuitive and powerful client for Bull job queue.  All jobs can be fully managed through the UI, which displays job state, data, progress, and stacktrace for failed jobs.  Waiting/delayed/failed jobs may be promoted/re-queued and any job can be deleted.  Jobs may be filtered by queue, state, id, or job data.
 
-Realtime and historical statistics (from el-borracho-stats) are visualized through el-borracho-graph, a set of Sidekiq-inspired Rickshaw graphs.
+**el-borracho-ui** gives a full overview of the health and state of the queue(s) in a single page.
+
+Realtime and historical statistics from [el-borracho-stats][el-borracho-stats] are visualized through [el-borracho-graph][el-borracho-graph], a set of Sidekiq-inspired Rickshaw graphs.
 
 All realtime data is read through Server-Sent-Events by default.
 
@@ -28,6 +30,9 @@ npm install --save el-borracho-ui
 ## License
 
 MIT
+
+  [el-borracho-stats]: https://github.com/nextorigin/el-borracho-stats
+  [el-borracho-graph]: https://github.com/nextorigin/el-borracho-graph
 
   [dependency]: https://img.shields.io/david/nextorigin/el-borracho-ui.svg?style=flat-square
   [david]: https://david-dm.org/nextorigin/el-borracho-ui
