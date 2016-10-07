@@ -67,8 +67,8 @@ class AddFiltersController extends Spine.Controller
     @Store.destroyAll()
     states = "active wait completed delayed failed stuck".split " "
     items  = ({type: "state", value} for value in states)
-    items.push type: "data"
-    items.push type: "id"
+    items.push type: "data", value: ""
+    items.push type: "id", value: ""
     record.save() for item in items when record = new @Store item
     return
 
