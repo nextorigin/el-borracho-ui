@@ -1,4 +1,7 @@
-li(class="filter #{type} #{value}" id="filter-#{id}" key=id data-id=id data-type=type data-value=value)
+-
+  if (type !== "data" && type !== "id") _valueClass = " " + value
+  else _valueClass = ""
+li(class="filter #{type}#{_valueClass}" id="filter-#{id}" key=id data-id=id data-type=type data-value=value)
   h6 #{type}:
     span.value= value
   button.icon.delete(title="delete") Â
