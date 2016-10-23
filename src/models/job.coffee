@@ -27,7 +27,7 @@ class Job extends Spine.Model
 
   @updateFilters: =>
     queues          = Filter.queues()
-    @filters.queues = queueFilters?.length and queueFilters or Queue.names()
+    @filters.queues = queues?.length and queues or Queue.names()
     @filters.states = Filter.states()
     @filters.ids    = Filter.ids()
     @filters.data   = Filter.data()
@@ -66,11 +66,11 @@ class Job extends Spine.Model
 
     for queue in @filters.queues
       if @filters.ids.length then for id in @filters.ids
-        somejobs = @findAllByAttribute "q_id", Number id
+        somejobs = @select (job) -> job.queue is queue and job.q_id is Number id
         jobs     = jobs.concat somejobs if somejobs?
 
       else if @filters.states.length then for state in @filters.states
-        somejobs = @findAllByAttribute "state", state
+        somejobs = @select (job) -> job.queue is queue and job.state is state
         jobs     = jobs.concat somejobs if somejobs?
 
       else
