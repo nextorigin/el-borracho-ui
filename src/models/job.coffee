@@ -132,7 +132,7 @@ class Job extends Spine.Model
     catch e
       return @trigger "error", e
 
-    if state = jobs.state or jobs[0].state
+    if state = jobs?.state or jobs[0]?.state
       if state in ["active", "wait"]
         oldJobs = @findAllByAttribute "state", state
         job.remove clear: true for job in oldJobs
