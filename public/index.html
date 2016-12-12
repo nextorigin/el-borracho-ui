@@ -123,7 +123,7 @@
   section.jobs li .stacktrace { visibility: hidden; color: #ed145b; font: 1em monospace; }
   section.jobs li.failed .stacktrace { visibility: visible; display: block; margin-top: 0.2em; height: 1.2em; overflow: hidden; }
   section.jobs li.failed .data { height: 1.25em; overflow: hidden; }
-  section.jobs li figure.progress { position: absolute; left: 0; top: 0; width: 0; height: 61px; background: rgba(0, 0, 0, 0.1); margin: 0; z-index: 1; }
+  section.jobs li figure.progress { position: absolute; left: 0; top: 0; width: 0; height: 61px; background: rgba(0, 0, 0, 0.1); margin: 0; z-index: 1; transition: width 0.3s linear; }
   section.jobs li h3,
   section.jobs li .data,
   section.jobs li .stacktrace { position: relative; z-index: 10; }
@@ -146,7 +146,7 @@
   section.jobs li.expanded dl.data-long dt { margin: 0; display: inline; font-size: 0.9em; }
   section.jobs li.expanded dl.data-long dd { margin: 0; padding-left: 0.5em; display: inline; font: 1.1em monospace; color: #aaa; }
   section.jobs li.expanded dl.data-long dd::after { content: "\A"; white-space: pre; }
-  section.jobs li.expanded figure.progress { position: relative; margin: 0.55em 0; width: 2px; transition: width 0.3s linear; display: flex; }
+  section.jobs li.expanded figure.progress { position: relative; margin: 0.55em 0; width: 2px; display: flex; }
   section.jobs li.expanded figure.progress figcaption { margin: auto 10px; font-size: 1.45em; font-weight: bold; }
   section.jobs li.expanded .stacktrace { white-space: pre; margin-top: 0.55em; height: auto; }
 
