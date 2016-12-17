@@ -230,6 +230,12 @@ nav.current.filters { -webkit-tap-highlight-color: rgba(0,0,0,0); }
   section.jobs li { width: 297px; }
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+nav.add.filters.show { max-height: inherit; }
+}
+@supports (-ms-ime-align:auto) {
+nav.add.filters.show { max-height: inherit; }
+}
   </style>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
   <script src="./js/el-borracho-ui.js" type="text/javascript" charset="utf-8"></script>
