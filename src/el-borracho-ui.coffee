@@ -1,3 +1,4 @@
+ESPoly   = require "event-source-polyfill"
 Spine    = require "spine"
 Maquette = require "maquette"
 
