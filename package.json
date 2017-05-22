@@ -57,7 +57,7 @@
     "mocha": "^3.1.0",
     "noty": "^2.3.8",
     "prependify": "^1.2.0",
-    "sinon": "^1.17.4",
+    "sinon": "^2.3.0",
     "spine": "^1.6.2",
     "spine-awaitajax": "^2.0.0",
     "stream-combiner": "^0.2.2",
