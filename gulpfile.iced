@@ -81,7 +81,7 @@ compilePug = new Combine [
 compileCoffee = new Combine [
   plugins.changed config.coffee.dest, extension: ".js"
   plugins.sourcemaps.init()
-  plugins.icedCoffee().on "error", notifier
+  plugins.icedCoffee(bare: true, runtime: "browserify").on "error", notifier
   plugins.sourcemaps.write()
   dest config.coffee.dest
 ]
