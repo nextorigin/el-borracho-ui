@@ -74,7 +74,7 @@ copyJS = new Combine [
 
 compilePug = new Combine [
   plugins.changed config.pug.dest, extension: ".js"
-  plugins.pugHyperscript({runtime: config.pug.runtime}).on "error", notifier
+  plugins.pugHyperscript({runtime: config.pug.runtime, class: true, marshalDataset: false}).on "error", notifier
   dest config.pug.dest
 ]
 
