@@ -44,7 +44,7 @@
     "gulp-load-plugins": "^1.2.4",
     "gulp-notify": "^2.2.0",
     "gulp-pug-hyperscript": "^1.0.2",
-    "gulp-sourcemaps": "^1.6.0",
+    "gulp-sourcemaps": "^1.12.0",
     "gulp-stylus": "^2.5.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.8",
@@ -63,5 +63,8 @@
     "stream-combiner": "^0.2.2",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "vinyl-fs": "^2.4.3"
   }
 }
