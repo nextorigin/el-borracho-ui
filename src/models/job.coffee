@@ -144,7 +144,7 @@ class Job extends Spine.Model
     @lru()
 
   @lru: ->
-    record.destroy() for record in @records[0..100] if @count() > 10000
+    record.remove clear: true for record in @records[0..100] if @count() > 10000
     return
 
   constructor: (attributes) ->
