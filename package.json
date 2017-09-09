@@ -48,7 +48,7 @@
     "gulp-stylus": "^2.5.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.8",
-    "iced-coffee-coverage": "^1.0.1",
+    "iced-coffee-coverage": "^1.0.21",
     "iced-coffee-script": "^108.0.11",
     "istanbul": "^0.4.4",
     "js-beautify": "^1.6.3",
