@@ -77,11 +77,14 @@ class Job extends Spine.Model
         jobs     = @all()
 
     if @filters.data.length then for data in @filters.data
-      [key, value] = data.split ":"
-      key          = key.trim()
-      value        = value.trim()
-      matcher      = new RegExp value
-      jobs         = (job for job in jobs when job.data?[key]?.toString().match matcher)
+      if data is "null"
+        jobs         = (job for job in jobs when job.data? is false)
+      else
+        [key, value] = data.split ":"
+        key          = key.trim()
+        value        = value.trim()
+        matcher      = new RegExp value
+        jobs         = (job for job in jobs when job.data?[key]?.toString().match matcher)
 
     jobs
 
