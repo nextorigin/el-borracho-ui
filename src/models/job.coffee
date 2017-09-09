@@ -169,6 +169,7 @@ class Job extends Spine.Model
     {baseUrl} = @constructor
     url       = "#{baseUrl}/#{@queue}/#{@q_id}"
     data      = _method: "delete"
+    data      = JSON.stringify data
     await Ajax.awaitPost {url, data}, ideally defer()
     super
     callback()
