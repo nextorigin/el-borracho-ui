@@ -81,7 +81,7 @@ class Job extends Spine.Model
       key          = key.trim()
       value        = value.trim()
       matcher      = new RegExp value
-      jobs         = (job for job in jobs when job.data[key]?.toString().match matcher)
+      jobs         = (job for job in jobs when job.data?[key]?.toString().match matcher)
 
     jobs
 

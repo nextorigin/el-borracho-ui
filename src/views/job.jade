@@ -38,9 +38,10 @@ li.job(classes=classes id="job-#{id}" key=id data-id=id)
   span.delay #{delaystring}
 
   dl.data-long
-    each key in Object.keys(data).sort()
-      dt #{key}
-      dd #{data[key]}
+    if data
+      each key in Object.keys(data).sort()
+        dt #{key}
+        dd #{data[key]}
 
   span.stacktrace #{stacktracestr}
 
