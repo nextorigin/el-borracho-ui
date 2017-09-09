@@ -19,6 +19,8 @@ class Job extends Spine.Model
     "date",
     "delay"
 
+  @recordLimit: 10000
+
   @filters:
     queues: []
     states: []
@@ -140,11 +142,12 @@ class Job extends Spine.Model
         oldJobs = @findAllByAttribute "state", state
         job.remove clear: true for job in oldJobs
 
+    @lru() if (@records.length + jobs.length) > @recordLimit
     @refresh jobs
-    @lru()
 
   @lru: ->
-    record.remove clear: true for record in @records[0..100] if @count() > 10000
+    record.remove clear: true for record in @records[0..100]
+    @lru if @records.length > @recordLimit
     return
 
   constructor: (attributes) ->
